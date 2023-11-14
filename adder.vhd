@@ -10,10 +10,10 @@ entity adder is
     ); 
 end adder; 
 
-architecture adder_arc of adder is 
+architecture adder of adder is 
 begin 
     process(X, Y) 
     begin -- algoritma utama operasi penjumlahan 
         Result <= X + Y; 
     end process; 
-end adder_arc; 
+end adder; 
