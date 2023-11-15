@@ -2,25 +2,25 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity bcd_ascii is
+entity ascii_bcd is
     port (
-        bcd_input: in std_logic_vector(7 downto 0);
-        ascii_output: out std_logic_vector(3 downto 0)
+        ascii_input: in std_logic_vector(7 downto 0);
+        bcd_output: out std_logic_vector(3 downto 0)
     );
-end entity bcd_ascii;
+end entity ascii_bcd;
 
-architecture behavioral of bcd_ascii is
+architecture behavioral of ascii_bcd is
 begin   
-    process(bcd_input)
+    process(ascii_input)
         variable digit: integer;
     begin
-        digit := to_integer(unsigned(bcd_input));
+        digit := to_integer(unsigned(ascii_input));
 
         case digit is
-            when 0 to 9 =>
-                ascii_output <= std_logic_vector(to_unsigned(digit + 48, 4)); -- Mengubah dari 8-bit ke 4-bit
+            when 48 to 57 =>  -- ASCII values for '0' to '9'
+                bcd_output <= std_logic_vector(to_unsigned(digit - 48, 4));  -- Convert ASCII to BCD
             when others =>
-                ascii_output <= "0000"; -- Output '0000' untuk BCD yang tidak valid
+                bcd_output <= "0000";  -- Output '0000' for invalid ASCII characters
         end case;
     end process;
 end architecture behavioral;
