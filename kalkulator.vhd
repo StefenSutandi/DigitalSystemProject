@@ -19,6 +19,13 @@ end kalkulator;
 
 architecture kalkulator_arc of kalkulator is
 
+component serial is
+    port(
+        clk: in std_logic;
+        reset: in std_logic;
+        data_in: in std_logic;
+        data_out: out std_logic
+    );
 component fsm is
     port(
         rst, clk, proceed: in std_logic;
