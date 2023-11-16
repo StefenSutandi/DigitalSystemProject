@@ -33,7 +33,7 @@ begin
             bcd_output => y_bcd
         );
 
-    -- Adder in BCD field with carry propagation
+    -- Adder in BCD field
     process(x_bcd, y_bcd)
         variable temp_sum: integer;
         variable temp_result: std_logic_vector(47 downto 0);
@@ -41,7 +41,8 @@ begin
     begin
         temp_sum := to_integer(unsigned(x_bcd)) + to_integer(unsigned(y_bcd)) + to_integer(carry);
         
-        for i in 11 downto 0 loop  -- Iterate for each group of 4 BCD bits from LSB to MSB
+        -- Iterate for each group of 4 BCD bits from LSB to MSB
+        for i in 11 downto 0 loop
         temp_sum := to_integer(unsigned(x_bcd(i * BCD_group + BCD_group - 1 downto i * BCD_group))) +
                     to_integer(unsigned(y_bcd(i * BCD_group + BCD_group - 1 downto i * BCD_group))) +
                     to_integer(temp_carry);
@@ -62,5 +63,6 @@ begin
                 error_flag <= '0';
             end if;
     sum_bcd_output <= sum_bcd;
-    error_flag <= error_flag
+    error_flag <= error_flag;
+    end process;
 end architecture behavioral;
