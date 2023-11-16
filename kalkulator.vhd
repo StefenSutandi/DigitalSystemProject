@@ -26,12 +26,15 @@ component serial is
         data_in: in std_logic;
         data_out: out std_logic
     );
+end component;
+
 component fsm is
     port(
         rst, clk, proceed: in std_logic;
         comparison: in std_logic_vector( 1 downto 0 );
         enable, xsel, ysel, xld, yld: out std_logic
         );
+end component;
         
 component register is
     port(
@@ -39,6 +42,7 @@ component register is
         input: in std_logic_vector( 3 downto 0 );
         output: out std_logic_vector( 3 downto 0 )
         );
+end component;
 
 component mux is
     port(
@@ -46,6 +50,7 @@ component mux is
         load, result: in std_logic_vector( 3 downto 0 );
         output: out std_logic_vector( 3 downto 0 )
         );
+end component;
 
 component comparator is
     port(
@@ -53,41 +58,48 @@ component comparator is
         x, y: in std_logic_vector( 3 downto 0 );
         output: out std_logic_vector( 1 downto 0 )
     );
+end component;
 
 component ascii_bcd is
     port(
         ascii_input: in std_logic_vector(7 downto 0);
         bcd_output: out std_logic_vector(3 downto 0)
     );
+end component;
 
 component adder is
     port(
         x, y: in std_logic_vector(3 downto 0);
         output: out std_logic_vector(3 downto 0)
     );
+end component;
 
 component subtractor is
     port(
         x, y: in std_logic_vector(3 downto 0);
         output: out std_logic_vector(3 downto 0)
     );
+end component;
 
 component multiplier is
     port(
         x, y: in std_logic_vector(3 downto 0);
         output: out std_logic_vector(3 downto 0)
     );
+end component;
 
 component divider is
     port(
         x, y: in std_logic_vector(3 downto 0);
         output: out std_logic_vector(3 downto 0)
     );
+end component;
 
 component bcd_ascii is
     port(
         bcd_input: in std_logic_vector(3 downto 0);
         ascii_output: out std_logic_vector(7 downto 0)
     );
+end component;
 
 end kalkulator_arc
