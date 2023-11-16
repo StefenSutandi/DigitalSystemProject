@@ -9,6 +9,7 @@ entity adder is
         y: in integer range 0 to 999_999_999_999;
         sum_bcd: out std_logic_vector(47 downto 0);
         carry_out: out std_logic
+        error_flag: out std_logic
     );
 end entity adder;
 
@@ -17,16 +18,16 @@ architecture behavioral of adder is
     signal sum_bcd: std_logic_vector(47 downto 0);
     signal carry: std_logic := '0';
     signal temp_carry: std_logic;
-    constant overflow_BCD : std_logic_vector(3 downto 0) := "0110";
+    constant BCD_group : integer := 4;
 begin
     -- ASCII to BCD conversion for X and Y
-    x_bcd_conversion: entity work.ascii_bcd
+    x_bcd_conversion: entity kalkulator.ascii_bcd
         port map (
             ascii_input => x,
             bcd_output => x_bcd
         );
 
-    y_bcd_conversion: entity work.ascii_bcd
+    y_bcd_conversion: entity kalkulator.ascii_bcd
         port map (
             ascii_input => y,
             bcd_output => y_bcd
@@ -36,29 +37,30 @@ begin
     process(x_bcd, y_bcd)
         variable temp_sum: integer;
         variable temp_result: std_logic_vector(47 downto 0);
+        variable temp_carry: std_logic
     begin
         temp_sum := to_integer(unsigned(x_bcd)) + to_integer(unsigned(y_bcd)) + to_integer(carry);
         
-        if temp_sum < 10 then
-            temp_result <= std_logic_vector(to_unsigned(temp_sum, 48)); -- Adjust the size for 12 digits
-            temp_carry <= '0';
-        else
-            temp_result <= std_logic_vector(to_unsigned(temp_sum - 10, 48));  -- Adjust the size for 12 digits
-            temp_carry <= '1';
-        end if;
+        for i in 11 downto 0 loop  -- Iterate for each group of 4 BCD bits from LSB to MSB
+        temp_sum := to_integer(unsigned(x_bcd(i * BCD_group + BCD_group - 1 downto i * BCD_group))) +
+                    to_integer(unsigned(y_bcd(i * BCD_group + BCD_group - 1 downto i * BCD_group))) +
+                    to_integer(temp_carry);
 
-        -- Add carry from the previous stage
-        temp_sum := to_integer(unsigned(temp_result(43 downto 0))) + to_integer(unsigned(overflow_BCD));
-        
-        if temp_sum < 10 then
-            sum_bcd <= temp_result(47 downto 4) & std_logic_vector(to_unsigned(temp_sum, 4));
-            carry <= temp_carry;
-        else
-            sum_bcd <= temp_result(47 downto 4) & std_logic_vector(to_unsigned(temp_sum - 10, 4));  -- Adjust the size for 12 digits
-            carry <= '1';
-        end if;
-    end process;
+            if temp_sum < 10 then
+                temp_result(i * BCD_group + BCD_group - 1 downto i * BCD_group) <= std_logic_vector(to_unsigned(temp_sum, BCD_group));
+                temp_carry := '0';
+            else
+                temp_result(i * BCD_group + BCD_group - 1 downto i * BCD_group) <= std_logic_vector(to_unsigned(temp_sum + 6, BCD_group));
+                temp_carry := '1';
+            end if;
+        end loop;
 
-    carry_out <= carry;
+         -- Error case if the size is greater than 48 bits
+            if sum_bcd'length > 48 then
+                error_flag <= '1';
+            else
+                error_flag <= '0';
+            end if;
     sum_bcd_output <= sum_bcd;
+    error_flag <= error_flag
 end architecture behavioral;
