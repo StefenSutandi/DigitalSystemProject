@@ -5,7 +5,7 @@ use IEEE.numeric_std.all;
 
 entity adder is
     port (
-        x: in integer range 0 to 999_999_999_999; -- Maximum 12-digit input
+        x: in integer range 0 to 999_999_999_999; -- Maximum 12 digit input
         y: in integer range 0 to 999_999_999_999;
         sum_bcd: out std_logic_vector(47 downto 0);
         carry_out: out std_logic
