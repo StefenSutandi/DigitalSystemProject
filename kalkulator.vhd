@@ -36,19 +36,19 @@ component fsm is
         );
 end component;
         
-component register is
+component regis is
     port(
         rst, clk, load: in std_logic;
-        input: in std_logic_vector( 3 downto 0 );
-        output: out std_logic_vector( 3 downto 0 )
+		input: in std_logic_vector( 3 downto 0 );
+		output: out std_logic_vector( 3 downto 0 )
         );
 end component;
 
 component mux is
     port(
-        rst, sLine: in std_logic;
-        load, result: in std_logic_vector( 3 downto 0 );
-        output: out std_logic_vector( 3 downto 0 )
+        selector : in std_logic_vector(1 downto 0);
+        adder, subtractor, multiplier, divider : in signed(3 downto 0); 
+        output_selector : out signed(3 downto 0) 
         );
 end component;
 
