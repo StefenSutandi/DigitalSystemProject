@@ -1,27 +1,31 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
-use IEEE.std_logic_arith.all;
-use IEEE.std_logic_unsigned.all;
+use IEEE.numeric_std.all;
 
 entity mux is 
-    port( selektor_operasi: IN STD_LOGIC_VECTOR (1 DOWNTO 0);
-          penjumlahan, pengurangan, perkalian, pembagian : IN SIGNED (3 DOWNTO 0); -- HASIL OPERASI MATEMATIKA
-          output_selektor : OUT SIGNED (3 DOWNTO 0) -- OPERASI MATEMATIKA YANG DIPILIH
-        );
+    port( 
+        selector : in std_logic_vector(1 downto 0);
+        adder, subtractor, multiplier, divider : in signed(3 downto 0); 
+        output_selector : out signed(3 downto 0) 
+    );
 end mux;
 
 architecture arc_mux of mux is
+    signal temp_output : signed(3 downto 0);  -- Variabel internal untuk hasil sementara
 begin
-    process(selektor_operasi, penjumlahan, pengurangan, perkalian, pembagian)
+    process(selector)
     begin
-        if (selektor_operasi = "00") then
-            output_selektor <= penjumlahan ; -- OPERASI MATEMATIKA YANG DIPILIH ADALAH PENJUMLAHAN 
-        elsif (selektor_operasi = "01") then
-            output_selektor <= pengurangan ; -- OPERASI MATEMATIKA YANG DIPILIH ADALAH PENGURANGAN 
-        elsif (selektor_operasi = "10") then
-            output_selektor <= perkalian ; -- OPERASI MATEMATIKA YANG DIPILIH ADALAH PERKALIAN
-        else  --(selektor_operasi = "11")
-            output_selektor <= pembagian ; -- OPERASI MATEMATIKA YANG DIPILIH ADALAH PEEMBAGIAN
-        end if ;
-    end process ;
-end arc_mux ;  
+        case selector is
+            when "00" =>
+                temp_output <= adder;
+            when "01" =>
+                temp_output <= subtractor;
+            when "10" =>
+                temp_output <= multiplier;
+            when others =>
+                temp_output <= divider;
+        end case;
+
+        output_selector <= temp_output;  -- Mengatur output berdasarkan hasil sementara
+    end process;
+end arc_mux;
