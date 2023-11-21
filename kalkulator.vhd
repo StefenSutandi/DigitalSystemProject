@@ -118,9 +118,9 @@ end component;
 
 component comparator_output is
     port (
-        bcd_input: in std_logic_vector(3 downto 0); -- Input BCD from mux
-        ascii_output: out std_logic_vector(7 downto 0) -- Output ASCII
-        error_flag: out std_logic;  -- Output error flag
+        bcd_input: in std_logic_vector(48 downto 0); -- Input BCD from mux (48 + 1 bits for sign)
+        ascii_output: out std_logic_vector(8 downto 0); -- Output ASCII (+1 for sign bit)
+        error_flag: out std_logic  -- Output error flag
     );
 end component;
 
