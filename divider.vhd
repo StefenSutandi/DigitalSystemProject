@@ -30,18 +30,6 @@ begin
         else
             error_flag <= '0';  -- Clear error flag for valid conditions
 
-            -- contoh
-            -- dibuat juga logikanya
-            if sequential_process = '1' then
-                -- Sequential division process
-                -- Divide input_x by input_y and store the result in result_bcd
-                -- Example: result_bcd <= x_bcd / y_bcd;
-            else
-                -- Non-sequential division process
-                -- Divide input_x by input_y and store the result in result_bcd
-                -- Example: result_bcd <= x_bcd / y_bcd;
-            end if;
-
             -- Convert result_bcd to output_result (ASCII)
             -- buat juga disini
         end if;

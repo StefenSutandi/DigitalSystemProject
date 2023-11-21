@@ -52,7 +52,7 @@ component mux is
         );
 end component;
 
-component comparator is
+component comparator_input is
     port (
         ascii_x_input: in std_logic_vector(7 downto 0); -- Input x (ASCII)
         ascii_y_input: in std_logic_vector(7 downto 0); -- Input y (ASCII)
@@ -113,6 +113,14 @@ component bcd_ascii is
     port (
         bcd_input: in std_logic_vector(3 downto 0); -- Input BCD from mux
         ascii_output: out std_logic_vector(7 downto 0) -- Output ASCII
+    );
+end component;
+
+component comparator_output is
+    port (
+        bcd_input: in std_logic_vector(3 downto 0); -- Input BCD from mux
+        ascii_output: out std_logic_vector(7 downto 0) -- Output ASCII
+        error_flag: out std_logic;  -- Output error flag
     );
 end component;
 
