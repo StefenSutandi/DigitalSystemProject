@@ -4,7 +4,7 @@ use IEEE.std_logic_arith.all;
 use IEEE.numeric_std.all;
 
 entity divider is
-    Port (
+    port (
         x: in integer range 0 to 999_999_999_999; 
         y: in integer range 0 to 999_999_999_999;
         error_flag: out std_logic;  -- Output error flag

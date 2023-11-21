@@ -19,7 +19,7 @@ end kalkulator;
 
 architecture kalkulator_arc of kalkulator is
 
-component serial is
+component serial_io is
     port(
         clk: in std_logic;
         reset: in std_logic;
@@ -72,30 +72,40 @@ component ascii_bcd is
 end component;
 
 component adder is
-    port(
-        x, y: in std_logic_vector(3 downto 0);
-        output: out std_logic_vector(3 downto 0)
+    port (
+        x: in integer range 0 to 999_999_999_999; -- Maximum 12 digit input
+        y: in integer range 0 to 999_999_999_999;
+        sum_bcd: out std_logic_vector(47 downto 0);
+        carry_out: out std_logic
+        error_flag: out std_logic
     );
 end component;
 
 component subtractor is
-    port(
-        x, y: in std_logic_vector(3 downto 0);
-        output: out std_logic_vector(3 downto 0)
+    port (
+        x: in integer range 0 to 999_999_999_999; -- Maximum 12 digit input
+        y: in integer range 0 to 999_999_999_999;
+        difference_bcd: out std_logic_vector(47 downto 0);
+        borrow_out: out std_logic;
+        error_flag: out std_logic
     );
 end component;
 
 component multiplier is
-    port(
-        x, y: in std_logic_vector(3 downto 0);
-        output: out std_logic_vector(3 downto 0)
+    port (
+        x: in integer range 0 to 999_999_999_999; 
+        y: in integer range 0 to 999_999_999_999;
+        error_flag: out std_logic;  -- Output error flag
+        output_result: out std_logic_vector(48 downto 0) -- Output result (48-bit + 1 sign bit)
     );
 end component;
 
 component divider is
-    port(
-        x, y: in std_logic_vector(3 downto 0);
-        output: out std_logic_vector(3 downto 0)
+    port (
+        x: in integer range 0 to 999_999_999_999; 
+        y: in integer range 0 to 999_999_999_999;
+        error_flag: out std_logic;  -- Output error flag
+        output_result: out std_logic_vector(48 downto 0) -- Output result (48-bit + 1 sign bit)
     );
 end component;
 
