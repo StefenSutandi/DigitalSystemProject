@@ -31,6 +31,7 @@ begin
             error_flag <= '0';  -- Clear error flag for valid conditions
 
             -- contoh
+            -- dibuat juga logikanya
             if sequential_process = '1' then
                 -- Sequential division process
                 -- Divide input_x by input_y and store the result in result_bcd
