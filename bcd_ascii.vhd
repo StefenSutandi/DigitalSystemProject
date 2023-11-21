@@ -2,25 +2,26 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity ascii_bcd is
+entity bcd_ascii is
     port (
-        ascii_input: in std_logic_vector(7 downto 0); -- Input ASCII from mux
-        bcd_output: out std_logic_vector(3 downto 0) -- Output BCD
+        bcd_input: in std_logic_vector(3 downto 0); -- Input BCD from mux
+        ascii_output: out std_logic_vector(7 downto 0) -- Output ASCII
     );
-end entity ascii_bcd;
+end entity bcd_ascii;
 
-architecture behavioral of ascii_bcd is
+architecture behavioral of bcd_ascii is
 begin
-    process(ascii_input)
+    process(bcd_input)
+        variable bcd_value: natural range 0 to 9;
     begin
-        -- ASCII to BCD Conversion
-        variable digit: integer;
-        digit := to_integer(unsigned(ascii_input));
-        case digit is
-            when 48 to 57 =>  -- ASCII values for '0' to '9'
-                bcd_output <= std_logic_vector(to_unsigned(digit - 48, 4));  -- Convert ASCII to BCD
+        -- BCD to ASCII Conversion
+        bcd_value := to_integer(unsigned(bcd_input));
+        
+        case bcd_value is
+            when 0 to 9 =>  -- BCD values for 0 to 9
+                ascii_output <= std_logic_vector(to_unsigned(bcd_value + 48, 8));  -- Convert BCD to ASCII
             when others =>
-                bcd_output <= "0000";  -- Output '0000' for invalid ASCII characters
+                ascii_output <= "00000000";  -- Output '0' for invalid BCD characters
         end case;
     end process;
 end architecture behavioral;

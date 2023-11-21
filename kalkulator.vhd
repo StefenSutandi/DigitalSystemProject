@@ -101,8 +101,8 @@ end component;
 
 component bcd_ascii is
     port (
-        ascii_input: in std_logic_vector(7 downto 0); -- Input ASCII from mux
-        bcd_output: out std_logic_vector(3 downto 0) -- Output BCD
+        bcd_input: in std_logic_vector(3 downto 0); -- Input BCD from mux
+        ascii_output: out std_logic_vector(7 downto 0) -- Output ASCII
     );
 end component;
 
