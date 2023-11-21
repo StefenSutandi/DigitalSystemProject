@@ -3,14 +3,14 @@ use IEEE.std_logic_1164.all;
 use IEEE.std_logic_arith.all;
 use IEEE.std_logic_unsigned.all;
 
-entity regis is
+entity register is
 	port( rst, clk, load: in std_logic;
 		input: in std_logic_vector( 3 downto 0 );
 		output: out std_logic_vector( 3 downto 0 )
 	);
-end regis;
+end register;
 
-architecture regis_arc of regis is
+architecture register_arc of register is
 begin
 	process( rst, clk, load, input )
 	begin
@@ -22,4 +22,4 @@ begin
 		end if;
 		end if;
 	end process;
-end regis_arc;
+end register_arc;

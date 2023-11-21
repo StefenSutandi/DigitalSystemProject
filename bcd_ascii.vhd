@@ -4,23 +4,24 @@ use ieee.numeric_std.all;
 
 entity bcd_ascii is
     port (
-        bcd_input: in std_logic_vector(7 downto 0);
-        ascii_output: out std_logic_vector(3 downto 0)
+        bcd_input: in std_logic_vector(3 downto 0); -- Input BCD from mux
+        ascii_output: out std_logic_vector(7 downto 0) -- Output ASCII
     );
 end entity bcd_ascii;
 
 architecture behavioral of bcd_ascii is
-begin   
+begin
     process(bcd_input)
-        variable digit: integer;
+        variable bcd_value: natural range 0 to 9;
     begin
-        digit := to_integer(unsigned(bcd_input));
-
-        case digit is
-            when 0 to 9 =>
-                ascii_output <= std_logic_vector(to_unsigned(digit + 48, 4)); -- Mengubah dari 8-bit ke 4-bit
+        -- BCD to ASCII Conversion
+        bcd_value := to_integer(unsigned(bcd_input));
+        
+        case bcd_value is
+            when 0 to 9 =>  -- BCD values for 0 to 9
+                ascii_output <= std_logic_vector(to_unsigned(bcd_value + 48, 8));  -- Convert BCD to ASCII
             when others =>
-                ascii_output <= "0000"; -- Output '0000' untuk BCD yang tidak valid
+                ascii_output <= "00000000";  -- Output '0' for invalid BCD characters
         end case;
     end process;
 end architecture behavioral;

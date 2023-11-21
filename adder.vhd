@@ -23,14 +23,14 @@ begin
     -- ASCII to BCD conversion for X and Y
     x_bcd_conversion: entity kalkulator.ascii_bcd
         port map (
-            ascii_input => x,
-            bcd_output => x_bcd
+            ascii_x_input => x,
+            bcd_x_output => x_bcd
         );
 
     y_bcd_conversion: entity kalkulator.ascii_bcd
         port map (
-            ascii_input => y,
-            bcd_output => y_bcd
+            ascii_y_input => y,
+            bcd_y_output => y_bcd
         );
 
     -- Adder in BCD field
@@ -64,5 +64,13 @@ begin
             end if;
     sum_bcd_output <= sum_bcd;
     error_flag <= error_flag;
+
+     -- BCD to ASCII conversion for BCD sum
+     sum_ascii_conversion: entity kalkulator.bcd_ascii
+     port map (
+         bcd_sum_input => sum_bcd,
+         ascii_output => sum_ascii
+     );
+
     end process;
 end architecture behavioral;

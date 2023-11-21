@@ -2,7 +2,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity kalkulator is
+entity kalkulator is -- Set as top-level-entity
     port(
         clk: in std_logic;
         reset: in std_logic;
@@ -19,7 +19,7 @@ end kalkulator;
 
 architecture kalkulator_arc of kalkulator is
 
-component serial is
+component serial_io is
     port(
         clk: in std_logic;
         reset: in std_logic;
@@ -36,7 +36,7 @@ component fsm is
         );
 end component;
         
-component regis is
+component register is
     port(
         rst, clk, load: in std_logic;
 		input: in std_logic_vector( 3 downto 0 );
@@ -52,7 +52,7 @@ component mux is
         );
 end component;
 
-component comparator is
+component comparator_input is
     port (
         ascii_x_input: in std_logic_vector(7 downto 0); -- Input x (ASCII)
         ascii_y_input: in std_logic_vector(7 downto 0); -- Input y (ASCII)
@@ -72,37 +72,55 @@ component ascii_bcd is
 end component;
 
 component adder is
-    port(
-        x, y: in std_logic_vector(3 downto 0);
-        output: out std_logic_vector(3 downto 0)
+    port (
+        x: in integer range 0 to 999_999_999_999; -- Maximum 12 digit input
+        y: in integer range 0 to 999_999_999_999;
+        sum_bcd: out std_logic_vector(47 downto 0);
+        carry_out: out std_logic
+        error_flag: out std_logic
     );
 end component;
 
 component subtractor is
-    port(
-        x, y: in std_logic_vector(3 downto 0);
-        output: out std_logic_vector(3 downto 0)
+    port (
+        x: in integer range 0 to 999_999_999_999; -- Maximum 12 digit input
+        y: in integer range 0 to 999_999_999_999;
+        difference_bcd: out std_logic_vector(47 downto 0);
+        borrow_out: out std_logic;
+        error_flag: out std_logic
     );
 end component;
 
 component multiplier is
-    port(
-        x, y: in std_logic_vector(3 downto 0);
-        output: out std_logic_vector(3 downto 0)
+    port (
+        x: in integer range 0 to 999_999_999_999; 
+        y: in integer range 0 to 999_999_999_999;
+        error_flag: out std_logic;  -- Output error flag
+        output_result: out std_logic_vector(48 downto 0) -- Output result (48-bit + 1 sign bit)
     );
 end component;
 
 component divider is
-    port(
-        x, y: in std_logic_vector(3 downto 0);
-        output: out std_logic_vector(3 downto 0)
+    port (
+        x: in integer range 0 to 999_999_999_999; 
+        y: in integer range 0 to 999_999_999_999;
+        error_flag: out std_logic;  -- Output error flag
+        output_result: out std_logic_vector(48 downto 0) -- Output result (48-bit + 1 sign bit)
     );
 end component;
 
 component bcd_ascii is
-    port(
-        bcd_input: in std_logic_vector(3 downto 0);
-        ascii_output: out std_logic_vector(7 downto 0)
+    port (
+        bcd_input: in std_logic_vector(3 downto 0); -- Input BCD from mux
+        ascii_output: out std_logic_vector(7 downto 0) -- Output ASCII
+    );
+end component;
+
+component comparator_output is
+    port (
+        bcd_input: in std_logic_vector(48 downto 0); -- Input BCD from mux (48 + 1 bits for sign)
+        ascii_output: out std_logic_vector(8 downto 0); -- Output ASCII (+1 for sign bit)
+        error_flag: out std_logic  -- Output error flag
     );
 end component;
 
