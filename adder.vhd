@@ -1,5 +1,3 @@
-<< << << < HEAD
-== == == =
 library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.std_logic_arith.all;
@@ -80,4 +78,3 @@ begin
 
   end process;
 end architecture behavioral;
->> >> >> > 1dd79fe4ff0c5c8f79e9bafb461ed298fec22ac4
