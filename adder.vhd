@@ -37,7 +37,7 @@ begin
         port map (
             ascii_y_input => y,
             bcd_y_output => y_bcd
-        );
+        );  
 
     -- Adder in BCD field
     process(x_bcd, y_bcd)

@@ -17,14 +17,14 @@ architecture behavioral of multiplierbin is
 begin
 process(x_bin, y_bin)
 
-y <= to integer(unsigne(y_bin))
+y <= to integer(unsigned(y_bin))
 
 begin
     for i in 0 to y loop
         temp_multi <= temp_multi + x_bin ;
         end loop;
 
-multiplier_out <= temp_multi;
+multiplier_out <= temp_mugitlti;
 
     end process;
 end architecture behavioral;
