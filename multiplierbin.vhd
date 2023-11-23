@@ -13,19 +13,17 @@ end entity multiplierbin;
 
 architecture behavioral of multiplierbin is
     signal temp_multi: std_logic_vector(9 downto 0);
-    constant y: integer
+    constant y: integer;
 begin
 process(x_bin, y_bin)
 
-y <= to integer(unsigned(y_bin))
-
 begin
+y <= to_integer(unsigned(y_bin));
     for i in 0 to y loop
         temp_multi <= temp_multi + x_bin ;
         end loop;
 
-multiplier_out <= temp_mugitlti;
+multiplier_out <= temp_multi;
 
     end process;
 end architecture behavioral;
-
