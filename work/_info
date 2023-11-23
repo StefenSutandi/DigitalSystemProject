@@ -1,0 +1,287 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi Sisdig/TugasBesarSistemDigital
+Eascii_bcd
+w1700119551
+Z1 DPx4 ieee 11 numeric_std 0 22 :ASDNFgHXf_ih3J@9F3Ze1
+Z2 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z3 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+R0
+8C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi Sisdig/TugasBesarSistemDigital/ascii_bcd.vhd
+FC:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi Sisdig/TugasBesarSistemDigital/ascii_bcd.vhd
+l0
+L5
+V=[kY^m17fF;VDlgHdARX]1
+!s100 gITcgW_MPMj8YOa=gBTDG2
+Z4 OV;C;10.6d;65
+32
+Z5 !s110 1700654143
+!i10b 1
+Z6 !s108 1700654143.000000
+!s90 -reportprogress|300|-work|work|C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi Sisdig/TugasBesarSistemDigital/ascii_bcd.vhd|
+!s107 C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi Sisdig/TugasBesarSistemDigital/ascii_bcd.vhd|
+!i113 1
+Z7 o-work work
+Z8 tExplicit 1 CvgOpt 0
+Ebcd_ascii
+Z9 w1700543509
+R1
+R2
+R3
+R0
+Z10 8C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi Sisdig/TugasBesarSistemDigital/bcd_ascii.vhd
+Z11 FC:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi Sisdig/TugasBesarSistemDigital/bcd_ascii.vhd
+l0
+L5
+V^OI22NjdHYdb::Ud`0G[Y1
+!s100 @W7o@engLPklcJ@D4nkPS3
+R4
+32
+R5
+!i10b 1
+R6
+Z12 !s90 -reportprogress|300|-work|work|C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi Sisdig/TugasBesarSistemDigital/bcd_ascii.vhd|
+Z13 !s107 C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi Sisdig/TugasBesarSistemDigital/bcd_ascii.vhd|
+!i113 1
+R7
+R8
+Abehavioral
+R1
+R2
+R3
+DEx4 work 9 bcd_ascii 0 22 ^OI22NjdHYdb::Ud`0G[Y1
+l13
+L12
+VS[]0[`:_M8OOd=gm`Mlk]0
+!s100 LK`@]7?lMAEjZgz1`VNzc0
+R4
+32
+R5
+!i10b 1
+R6
+R12
+R13
+!i113 1
+R7
+R8
+Ecomparator_input
+Z14 w1700547826
+R1
+R2
+R3
+R0
+8C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi Sisdig/TugasBesarSistemDigital/comparator_input.vhd
+FC:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi Sisdig/TugasBesarSistemDigital/comparator_input.vhd
+l0
+L5
+VBeZNAXb5?F>cF0UZa8;a72
+!s100 mfne[Y]MSNL7I`MF0cMW72
+R4
+32
+R5
+!i10b 1
+R6
+!s90 -reportprogress|300|-work|work|C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi Sisdig/TugasBesarSistemDigital/comparator_input.vhd|
+!s107 C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi Sisdig/TugasBesarSistemDigital/comparator_input.vhd|
+!i113 1
+R7
+R8
+Ecomparator_output
+R14
+R1
+R2
+R3
+R0
+8C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi Sisdig/TugasBesarSistemDigital/comparator_output.vhd
+FC:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi Sisdig/TugasBesarSistemDigital/comparator_output.vhd
+l0
+L5
+V3n^XVI[C1>oB<RNV3IA9:3
+!s100 fz3W[Bo@h<9RBg8QcJ?_b1
+R4
+32
+R5
+!i10b 1
+R6
+!s90 -reportprogress|300|-work|work|C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi Sisdig/TugasBesarSistemDigital/comparator_output.vhd|
+!s107 C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi Sisdig/TugasBesarSistemDigital/comparator_output.vhd|
+!i113 1
+R7
+R8
+Edivider
+R14
+R1
+R2
+R3
+R0
+Z15 8C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi Sisdig/TugasBesarSistemDigital/dividerr.vhd
+Z16 FC:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi Sisdig/TugasBesarSistemDigital/dividerr.vhd
+l0
+L5
+V=552TAjli;>[WPkBM=h:]2
+!s100 J9QB1NLk:7?zg^K<=]4j;2
+R4
+32
+Z17 !s110 1700654144
+!i10b 1
+Z18 !s108 1700654144.000000
+Z19 !s90 -reportprogress|300|-work|work|C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi Sisdig/TugasBesarSistemDigital/dividerr.vhd|
+Z20 !s107 C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi Sisdig/TugasBesarSistemDigital/dividerr.vhd|
+!i113 1
+R7
+R8
+Abehavioral
+R1
+R2
+R3
+DEx4 work 7 divider 0 22 =552TAjli;>[WPkBM=h:]2
+l18
+L15
+V@H0lG0A4c`h3?K8562VcE2
+!s100 k`BZ0gf=AQI@Q:G9]N:Ij3
+R4
+32
+R17
+!i10b 1
+R18
+R19
+R20
+!i113 1
+R7
+R8
+Efsm
+Z21 w1700116465
+Z22 DPx4 ieee 18 std_logic_unsigned 0 22 ;eZjO2D4ZDz<]0>8AL<ne1
+Z23 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
+R2
+R3
+R0
+Z24 8C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi Sisdig/TugasBesarSistemDigital/fsm.vhd
+Z25 FC:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi Sisdig/TugasBesarSistemDigital/fsm.vhd
+l0
+L6
+V60=BlGV079QzideeLMmf33
+!s100 lGz9F>n3z2[o?lU6N?M_e1
+R4
+32
+R17
+!i10b 1
+R18
+Z26 !s90 -reportprogress|300|-work|work|C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi Sisdig/TugasBesarSistemDigital/fsm.vhd|
+Z27 !s107 C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi Sisdig/TugasBesarSistemDigital/fsm.vhd|
+!i113 1
+R7
+R8
+Abehavioral
+R22
+R23
+R2
+R3
+DEx4 work 3 fsm 0 22 60=BlGV079QzideeLMmf33
+l24
+L19
+VEX[DKBaESU^>D4nPDc?221
+!s100 _8baJ9NNniA6^Jl[jb1c?3
+R4
+32
+R17
+!i10b 1
+R18
+R26
+R27
+!i113 1
+R7
+R8
+Ekalkulator
+R14
+R1
+R2
+R3
+R0
+8C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi Sisdig/TugasBesarSistemDigital/kalkulator.vhd
+FC:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi Sisdig/TugasBesarSistemDigital/kalkulator.vhd
+l0
+L5
+Vfg9=1f7M@dIRhcY<bCELP0
+!s100 acMZ_PAM0jog4S_gTnLja2
+R4
+32
+R17
+!i10b 1
+R18
+!s90 -reportprogress|300|-work|work|C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi Sisdig/TugasBesarSistemDigital/kalkulator.vhd|
+!s107 C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi Sisdig/TugasBesarSistemDigital/kalkulator.vhd|
+!i113 1
+R7
+R8
+Emux
+R9
+R1
+R2
+R3
+R0
+Z28 8C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi Sisdig/TugasBesarSistemDigital/mux.vhd
+Z29 FC:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi Sisdig/TugasBesarSistemDigital/mux.vhd
+l0
+L5
+VW=070^Tz]<m;1z:VbkzDJ2
+!s100 :bEY>Y14b8kRTE;`cFi1N0
+R4
+32
+R17
+!i10b 1
+R18
+Z30 !s90 -reportprogress|300|-work|work|C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi Sisdig/TugasBesarSistemDigital/mux.vhd|
+Z31 !s107 C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi Sisdig/TugasBesarSistemDigital/mux.vhd|
+!i113 1
+R7
+R8
+Aarc_mux
+R1
+R2
+R3
+DEx4 work 3 mux 0 22 W=070^Tz]<m;1z:VbkzDJ2
+l15
+L13
+VD3@1k[I6OYJPBGR:Zeo8N1
+!s100 ZfOV`d6fBUf[aZ9C>5cnn3
+R4
+32
+R17
+!i10b 1
+R18
+R30
+R31
+!i113 1
+R7
+R8
+Eserial_io
+w1700108760
+R22
+R23
+R2
+R3
+R0
+8C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi Sisdig/TugasBesarSistemDigital/serial_io.vhd
+FC:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi Sisdig/TugasBesarSistemDigital/serial_io.vhd
+l0
+L6
+V?2^IZjRg1:Xh^ZO_oN>AZ1
+!s100 D>WX8Rim79j2L0fZhA5o_1
+R4
+32
+R17
+!i10b 1
+R18
+!s90 -reportprogress|300|-work|work|C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi Sisdig/TugasBesarSistemDigital/serial_io.vhd|
+!s107 C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi Sisdig/TugasBesarSistemDigital/serial_io.vhd|
+!i113 1
+R7
+R8

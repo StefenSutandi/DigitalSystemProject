@@ -19,6 +19,7 @@ end kalkulator;
 
 architecture kalkulator_arc of kalkulator is
 
+begin
 component serial_io is
     port(
         clk: in std_logic;
@@ -123,7 +124,5 @@ component comparator_output is
         error_flag: out std_logic  -- Output error flag
     );
 end component;
-
-begin
 
 end architecture kalkulator_arc;
