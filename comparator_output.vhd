@@ -19,7 +19,7 @@ begin
         -- Check for invalid BCD input length (more than 48 + 1 bits)
         if bcd_input'length > 49 then
             ascii_output <= "000000000"; -- Output '0' for invalid BCD characters (+1 for sign bit)
-            error_flag <= '1';  -- Set error flag for BCD input length greater than 48 + 1 bits
+            error_flag <= 'ERROR';  -- Set error flag for BCD input length greater than 48 + 1 bits
         else
             -- Extract BCD value if input length is valid
             bcd_value <= bcd_input(47 downto 0); -- Extracting the BCD value (ignoring sign bit)
@@ -27,13 +27,13 @@ begin
             -- Convert BCD to ASCII and include the sign bit
             if (bcd_input(48) = '1') then
                 ascii_output <= "000000000"; -- Output '0' for negative BCD values (+1 for sign bit)
-                error_flag <= '1';  -- Set error flag for negative BCD values
+                error_flag <= 'ERROR';  -- Set error flag for negative BCD values
             else
                 -- Perform the conversion for valid positive BCD values
                 if (to_integer(bcd_value) > 999_999_999) then
                     -- Check for value greater than 999_999_999
                     ascii_output <= "000000000"; -- Output '0' for invalid BCD characters (+1 for sign bit)
-                    error_flag <= '1';  -- Set error flag if input is greater than 999_999_999
+                    error_flag <= 'ERROR';  -- Set error flag if input is greater than 999_999_999
                 else
                     ascii_output <= std_logic_vector(to_unsigned(to_integer(bcd_value) + 48, 8)) & '0';
                     -- Convert BCD to ASCII and include the sign bit
