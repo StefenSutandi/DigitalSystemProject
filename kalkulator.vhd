@@ -36,7 +36,7 @@ component fsm is
         );
 end component;
         
-component register is
+component regis is
     port(
         rst, clk, load: in std_logic;
 		input: in std_logic_vector( 3 downto 0 );
