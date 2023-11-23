@@ -20,11 +20,13 @@ end kalkulator;
 architecture kalkulator_arc of kalkulator is
 
 component serial_io is
-    port(
-        clk: in std_logic;
-        reset: in std_logic;
-        data_in: in std_logic;
-        data_out: out std_logic
+    port (
+        clk : in std_logic; -- Sinyal clock
+        reset : in std_logic; -- Sinyal reset
+        serial_in : in std_logic; -- Sinyal input serial
+        serial_out : out std_logic; -- Sinyal output serial
+        output_data : out signed(47 downto 0); -- Hasil operasi (maksimal 12 digit)
+        error_flag : out std_logic -- Flag error
     );
 end component;
 
@@ -54,20 +56,20 @@ end component;
 
 component comparator_input is
     port (
-        ascii_x_input: in std_logic_vector(7 downto 0); -- Input x (ASCII)
-        ascii_y_input: in std_logic_vector(7 downto 0); -- Input y (ASCII)
+        ascii_x_input: in std_logic_vector(47 downto 0); -- Input x (ASCII)
+        ascii_y_input: in std_logic_vector(47 downto 0); -- Input y (ASCII)
         error_flag: out std_logic;  -- Output error flag
-        bcd_x_output: out std_logic_vector(3 downto 0); -- Output BCD for x
-        bcd_y_output: out std_logic_vector(3 downto 0)  -- Output BCD for y
+        bcd_x_output: out std_logic_vector(47 downto 0); -- Output BCD for x
+        bcd_y_output: out std_logic_vector(47 downto 0)  -- Output BCD for y
     );
 end component;
 
 component ascii_bcd is
-    port(
-        ascii_x_input: in std_logic_vector(7 downto 0); -- Input x (ASCII)
-        ascii_y_input: in std_logic_vector(7 downto 0); -- Input y (ASCII)
-        bcd_x_output: out std_logic_vector(3 downto 0); -- Output BCD for x
-        bcd_y_output: out std_logic_vector(3 downto 0)  -- Output BCD for y
+    port (
+        ascii_x_input: in std_logic_vector(47 downto 0); -- Input ASCII (48-bit)
+        ascii_y_input: in std_logic_vector(47 downto 0); -- Input ASCII (48-bit)
+        bcd_x_output: out std_logic_vector(47 downto 0) -- Output BCD (12-digit x 4-bit each)
+        bcd_y_output: out std_logic_vector(47 downto 0) -- Output BCD (12-digit x 4-bit each)
     );
 end component;
 
@@ -111,8 +113,10 @@ end component;
 
 component bcd_ascii is
     port (
-        bcd_input: in std_logic_vector(3 downto 0); -- Input BCD from mux
-        ascii_output: out std_logic_vector(7 downto 0) -- Output ASCII
+        bcd_x_input: in std_logic_vector(47 downto 0); -- Input BCD (12-digit x 4-bit each)
+        bcd_y_input: in std_logic_vector(47 downto 0); -- Input BCD (12-digit x 4-bit each)
+        ascii_x_output: out std_logic_vector(47 downto 0); -- Output ASCII (48-bit)
+        ascii_y_output: out std_logic_vector(47 downto 0) -- Output ASCII (48-bit)
     );
 end component;
 
