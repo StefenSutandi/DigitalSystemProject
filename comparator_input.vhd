@@ -4,16 +4,16 @@ use ieee.numeric_std.all;
 
 entity comparator_input is
     port (
-        ascii_x_input: in std_logic_vector(7 downto 0); -- Input x (ASCII)
-        ascii_y_input: in std_logic_vector(7 downto 0); -- Input y (ASCII)
+        ascii_x_input: in std_logic_vector(47 downto 0); -- Input x (ASCII)
+        ascii_y_input: in std_logic_vector(47 downto 0); -- Input y (ASCII)
         error_flag: out std_logic;  -- Output error flag
-        bcd_x_output: out std_logic_vector(3 downto 0); -- Output BCD for x
-        bcd_y_output: out std_logic_vector(3 downto 0)  -- Output BCD for y
+        bcd_x_output: out std_logic_vector(47 downto 0); -- Output BCD for x
+        bcd_y_output: out std_logic_vector(47 downto 0)  -- Output BCD for y
     );
 end comparator_input;
 
 architecture behavioral of comparator_input is
-    signal x_bcd, y_bcd: std_logic_vector(3 downto 0);  -- BCD conversion for x and y
+    signal x_bcd, y_bcd: std_logic_vector(47 downto 0);  -- BCD conversion for x and y
 begin
     process(ascii_x_input, ascii_y_input)
     begin
