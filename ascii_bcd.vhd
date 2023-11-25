@@ -45,7 +45,7 @@ entity ascii_bcd is
     port (
         ascii_x_input: in std_logic_vector(47 downto 0); -- Input ASCII (48-bit)
         ascii_y_input: in std_logic_vector(47 downto 0); -- Input ASCII (48-bit)
-        bcd_x_output: out std_logic_vector(47 downto 0) -- Output BCD (12-digit x 4-bit each)
+        bcd_x_output: out std_logic_vector(47 downto 0); -- Output BCD (12-digit x 4-bit each)
         bcd_y_output: out std_logic_vector(47 downto 0) -- Output BCD (12-digit x 4-bit each)
     );
 end entity ascii_bcd;

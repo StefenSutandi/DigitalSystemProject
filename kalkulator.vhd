@@ -1,20 +1,19 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
+use ieee.std_logic_arith.all;
+use ieee.std_logic_unsigned.all;
+use ieee.math_real.all;
+use work.all;
 
 entity kalkulator is -- Set as top-level-entity
-    port(
-        clk: in std_logic;
-        reset: in std_logic;
-        input_valid: in std_logic;
-        input_data: in std_logic_vector(47 downto 0);
+    port (
+        input_x, input_y: in std_logic_vector(47 downto 0);
         operation_choice: in std_logic_vector(1 downto 0);
-        sequential_mode: in std_logic;
-        output_valid: out std_logic;
+        sequential_mode: in std_logic_vector(1 downto 0);
         output_data: out std_logic_vector(47 downto 0);
-        error_flag: out std_logic;
         display_error: out std_logic
-        );
+    );
 end kalkulator;
 
 architecture kalkulator_arc of kalkulator is
@@ -68,7 +67,7 @@ component ascii_bcd is
     port (
         ascii_x_input: in std_logic_vector(47 downto 0); -- Input ASCII (48-bit)
         ascii_y_input: in std_logic_vector(47 downto 0); -- Input ASCII (48-bit)
-        bcd_x_output: out std_logic_vector(47 downto 0) -- Output BCD (12-digit x 4-bit each)
+        bcd_x_output: out std_logic_vector(47 downto 0); -- Output BCD (12-digit x 4-bit each)
         bcd_y_output: out std_logic_vector(47 downto 0) -- Output BCD (12-digit x 4-bit each)
     );
 end component;
@@ -129,5 +128,20 @@ component comparator_output is
 end component;
 
 begin
+	--REPRESENTASI PORT MAP
+	X_SER 		: serial_io port map(x_bcd, y_bcd, sum_bcd, carry, temp_carry);
+	X_FSM 		: fsm port map(cState, nState, states, zAdder, zSubtractor, zMultiplier, zDivider, zResult, newX);
+	X_REGIS		: regis port map(input,output);
+	X_MUX		: mux port map(temp_output);
+	X_COM_IN	: comparator_input port map(x_bcd,y_bcd);
+	X_AS_BCD	: ascii_bcd port map(ascii_x_input, ascii_y_input, bcd_x_input, bcd_y_input);
+	X_ADD		: adder port map(x_bcd, y_bcd, sum_bcd, carry, temp_carry);
+	X_SUB		: subtractor port map(x_bcd, y_bcd, difference_bcd, borrow);
+	X_MULTI		: multiplier port map(x_bcd, y_bcd, x_multi, y_multi, sum_bcd, temp_multi, carry, temp_carry);
+	X_DIV		: divider port map(x_bcd, y_bcd, result_bcd);
+	X_BCD_AS	: bcd_ascii port map(bcd_x_input, bcd_y_input, ascii_x_output, ascii_y_output);
+	X_COM_OUT	: comparator_out port map(bcd_value);
 
+	result <= temp_output;
+	
 end architecture kalkulator_arc;

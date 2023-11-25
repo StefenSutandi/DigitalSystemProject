@@ -1,10 +1,10 @@
-library IEEE; 
-use IEEE.std_logic_1164.all; 
--- use IEEE.std_logic_arith.all; 
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.std_logic_arith.all;
 use IEEE.numeric_std.all;
 
 package my_types is
-	type my_integer is range -999_999_999_999 to 999_999_999_999;
+    type my_integer is range -999_999_999_999 to 999_999_999_999;
 end package my_types;
 
 use work.my_types.all;
@@ -13,7 +13,7 @@ entity adder is
     port (
         x: in my_integer; 
         y: in my_integer;
-        sum_bcd: out std_logic_vector(47 downto 0);
+        result_bcd: out std_logic_vector(47 downto 0);
         carry_out: out std_logic;
         error_flag: out std_logic
     );
@@ -21,12 +21,13 @@ end entity adder;
 
 architecture behavioral of adder is
     signal x_bcd, y_bcd: std_logic_vector(47 downto 0);
-    signal sum_bcd: std_logic_vector(47 downto 0);
+    signal result_bcd: std_logic_vector(47 downto 0); -- Renamed from sum_bcd
     signal carry: std_logic := '0';  -- Use signal for carry
     signal temp_carry: std_logic;  -- Signal for temp_carry
     constant BCD_group : integer := 4;
 begin
     -- ASCII to BCD conversion for X and Y
+    -- (Assuming you have the correct entity "ascii_bcd" for conversion)
     x_bcd_conversion: entity work.ascii_bcd
         port map (
             ascii_x_input => x,
@@ -37,7 +38,7 @@ begin
         port map (
             ascii_y_input => y,
             bcd_y_output => y_bcd
-        );
+        );  
 
     -- Adder in BCD field
     process(x_bcd, y_bcd)
@@ -61,11 +62,11 @@ begin
             end if;
         end loop;
 
-        -- Assign the final result to the sum_bcd signal
-        sum_bcd <= temp_result;
+        -- Assign the final result to the result_bcd signal
+        result_bcd <= temp_result;
 
         -- Error case if the size is greater than 48 bits
-        if sum_bcd'length > 48 then
+        if result_bcd'length > 48 then
             error_flag <= '1';
         else
             error_flag <= '0';
@@ -73,9 +74,10 @@ begin
     end process;
 
     -- BCD to ASCII conversion for BCD sum
+    -- (Assuming you have the correct entity "bcd_ascii" for conversion)
     sum_ascii_conversion: entity kalkulator.bcd_ascii
         port map (
-            bcd_sum_input => sum_bcd,
+            bcd_sum_input => result_bcd,
             ascii_output => sum_ascii
         );
 
