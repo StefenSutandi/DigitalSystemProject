@@ -13,8 +13,8 @@ entity adder is
     port (
         x: in my_integer; 
         y: in my_integer;
-        sum_bcd: out std_logic_vector(47 downto 0);
         carry_out: out std_logic;
+        sum_bcd: out std_logic_vector(47 downto 0);
         error_flag: out std_logic
     );
 end entity adder;
