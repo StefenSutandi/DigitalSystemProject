@@ -1,5 +1,5 @@
 Analysis & Synthesis report for kalkulator
-Sun Nov 26 13:16:45 2023
+Sun Nov 26 20:49:27 2023
 Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
@@ -36,7 +36,7 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                      ;
 +------------------------------------+----------------------------------------------+
-; Analysis & Synthesis Status        ; Failed - Sun Nov 26 13:16:45 2023            ;
+; Analysis & Synthesis Status        ; Failed - Sun Nov 26 20:49:27 2023            ;
 ; Quartus II Version                 ; 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition ;
 ; Revision Name                      ; kalkulator                                   ;
 ; Top-level Entity Name              ; kalkulator                                   ;
@@ -149,12 +149,10 @@ Parallel compilation was disabled, but you have multiple processors available. E
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
-    Info: Processing started: Sun Nov 26 13:16:44 2023
+    Info: Processing started: Sun Nov 26 20:49:27 2023
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off kalkulator -c kalkulator
-Warning (10639): VHDL warning at adder.vhd(7): constant value overflow
-Info: Found 3 design units, including 1 entities, in source file adder.vhd
-    Info: Found design unit 1: my_types
-    Info: Found design unit 2: adder-behavioral
+Info: Found 2 design units, including 1 entities, in source file adder.vhd
+    Info: Found design unit 1: adder-behavioral
     Info: Found entity 1: adder
 Info: Found 2 design units, including 1 entities, in source file ascii_bcd.vhd
     Info: Found design unit 1: ascii_bcd-behavioral
@@ -173,11 +171,15 @@ Warning (10639): VHDL warning at kalkulator.vhd(107): constant value overflow
 Info: Found 2 design units, including 1 entities, in source file kalkulator.vhd
     Info: Found design unit 1: kalkulator-kalkulator_arc
     Info: Found entity 1: kalkulator
-Error (10482): VHDL error at adder.vhd(16): object "std_logic" is used but not declared File: C:/Users/stefe/Documents/GitHub/TugasBesarSistemDigital/adder.vhd Line: 16
-Error: Quartus II Analysis & Synthesis was unsuccessful. 1 error, 9 warnings
+Error (10349): VHDL Association List error at adder.vhd(88): formal "bcd_input" does not exist File: C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/TugasBesarSistemDigital/adder.vhd Line: 88
+Error (10346): VHDL error at adder.vhd(86): formal port or parameter "bcd_x_input" must have actual or default value File: C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/TugasBesarSistemDigital/adder.vhd Line: 86
+Error (10784): HDL error at adder.vhd(33): see declaration for object "bcd_x_input" File: C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/TugasBesarSistemDigital/adder.vhd Line: 33
+Error (10346): VHDL error at adder.vhd(86): formal port or parameter "bcd_y_input" must have actual or default value File: C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/TugasBesarSistemDigital/adder.vhd Line: 86
+Error (10784): HDL error at adder.vhd(34): see declaration for object "bcd_y_input" File: C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/TugasBesarSistemDigital/adder.vhd Line: 34
+Error: Quartus II Analysis & Synthesis was unsuccessful. 5 errors, 8 warnings
     Error: Peak virtual memory: 242 megabytes
-    Error: Processing ended: Sun Nov 26 13:16:45 2023
-    Error: Elapsed time: 00:00:01
+    Error: Processing ended: Sun Nov 26 20:49:27 2023
+    Error: Elapsed time: 00:00:00
     Error: Total CPU time (on all processors): 00:00:00
 
 
