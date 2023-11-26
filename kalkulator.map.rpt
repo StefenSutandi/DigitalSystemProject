@@ -1,5 +1,5 @@
 Analysis & Synthesis report for kalkulator
-Sat Nov 25 19:01:11 2023
+Sun Nov 26 12:59:42 2023
 Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
@@ -36,7 +36,7 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                      ;
 +------------------------------------+----------------------------------------------+
-; Analysis & Synthesis Status        ; Failed - Sat Nov 25 19:01:11 2023            ;
+; Analysis & Synthesis Status        ; Failed - Sun Nov 26 12:59:42 2023            ;
 ; Quartus II Version                 ; 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition ;
 ; Revision Name                      ; kalkulator                                   ;
 ; Top-level Entity Name              ; kalkulator                                   ;
@@ -149,7 +149,7 @@ Parallel compilation was disabled, but you have multiple processors available. E
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
-    Info: Processing started: Sat Nov 25 19:01:11 2023
+    Info: Processing started: Sun Nov 26 12:59:41 2023
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off kalkulator -c kalkulator
 Warning (10639): VHDL warning at adder.vhd(7): constant value overflow
 Info: Found 3 design units, including 1 entities, in source file adder.vhd
@@ -176,8 +176,8 @@ Info: Found 2 design units, including 1 entities, in source file kalkulator.vhd
 Error (10482): VHDL error at adder.vhd(16): object "std_logic_vector" is used but not declared File: C:/Users/stefe/Documents/GitHub/TugasBesarSistemDigital/adder.vhd Line: 16
 Error: Quartus II Analysis & Synthesis was unsuccessful. 1 error, 9 warnings
     Error: Peak virtual memory: 242 megabytes
-    Error: Processing ended: Sat Nov 25 19:01:12 2023
-    Error: Elapsed time: 00:00:01
+    Error: Processing ended: Sun Nov 26 12:59:43 2023
+    Error: Elapsed time: 00:00:02
     Error: Total CPU time (on all processors): 00:00:00
 
 
