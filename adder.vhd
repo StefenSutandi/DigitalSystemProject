@@ -3,16 +3,10 @@ use IEEE.std_logic_1164.all;
 use IEEE.std_logic_arith.all;
 use IEEE.numeric_std.all;
 
-package my_types is
-	type my_integer is range -999_999_999_999 to 999_999_999_999;
-end package my_types;
-
-use work.my_types.all;
-
 entity adder is
     port (
-        x: in my_integer; 
-        y: in my_integer;
+        x: in std_logic_vector(47 downto 0)
+        y: in std_logic_vector(47 downto 0)
         carry_out: out std_logic;
         sum_bcd: out std_logic_vector(47 downto 0);
         error_flag: out std_logic
@@ -21,23 +15,29 @@ end entity adder;
 
 architecture behavioral of adder is
     signal x_bcd, y_bcd: std_logic_vector(47 downto 0);
-    signal sum_bcd: std_logic_vector(47 downto 0);
+    signal sum_bcd1: std_logic_vector(47 downto 0);
     signal carry: std_logic := '0';  -- Use signal for carry
     signal temp_carry: std_logic;  -- Signal for temp_carry
     constant BCD_group : integer := 4;
+
+component ascii_bcd is
+    port(
+        ascii_x_input: in std_logic_vector(7 downto 0); -- Input x (ASCII)
+        ascii_y_input: in std_logic_vector(7 downto 0); -- Input y (ASCII)
+        bcd_x_output: out std_logic_vector(3 downto 0); -- Output BCD for x
+        bcd_y_output: out std_logic_vector(3 downto 0)  -- Output BCD for y
+    );
+end component;   
+
 begin
     -- ASCII to BCD conversion for X and Y
-    x_bcd_conversion: entity work.ascii_bcd
+    bcd_conversion: ascii_bcd
         port map (
             ascii_x_input => x,
-            bcd_x_output => x_bcd
-        );
-
-    y_bcd_conversion: entity work.ascii_bcd
-        port map (
+            bcd_x_output => x_bcd,
             ascii_y_input => y,
             bcd_y_output => y_bcd
-        );  
+        ); 
 
     -- Adder in BCD field
     process(x_bcd, y_bcd)
