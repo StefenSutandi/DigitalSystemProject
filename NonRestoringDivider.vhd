@@ -28,6 +28,7 @@ begin
 			valid <= '0';
 		else
 			if rising_edge(dividend) then
+				
 				-- Initialize variables
 				Q := dividend;
 				M := '0' & divisor;
@@ -61,18 +62,6 @@ begin
 				valid <= '1';
 				
 			end if;
-		end if;
-				
-				-- AI Made
-				/*	R := R - B;
-					if R(DATA_WIDTH-1) = '1' then
-						R := R + B;
-						Q(i) := '0';
-					else
-						Q(i) := '1';
-					end if;
-					R := R << 1;
-				*/
-				
+		end if;				
     end process;
 end architecture Behavioral;
