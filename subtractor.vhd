@@ -1,69 +1,86 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
-use IEEE.std_logic_arith.all; 
 use IEEE.numeric_std.all;
 
-entity subtractor is
+entity adder is
     port (
-        x: in integer range 0 to 999_999_999_999; -- Maximum 12 digit input
-        y: in integer range 0 to 999_999_999_999;
-        difference_bcd: out std_logic_vector(47 downto 0);
-        borrow_out: out std_logic;
+        x: in std_logic_vector(47 downto 0);
+        y: in std_logic_vector(47 downto 0);
+        Result: out std_logic_vector(47 downto 0);
         error_flag: out std_logic
     );
-end entity subtractor;
+end entity adder;
 
-architecture behavioral of subtractor is
+architecture behavioral of adder is
     signal x_bcd, y_bcd: std_logic_vector(47 downto 0);
-    signal difference_bcd: std_logic_vector(47 downto 0);
-    signal borrow: std_logic := '0';
     constant BCD_group : integer := 4;
+
+component ascii_bcd is
+    port(
+        ascii_x_input: in std_logic_vector(7 downto 0); -- Input x (ASCII)
+        ascii_y_input: in std_logic_vector(7 downto 0); -- Input y (ASCII)
+        bcd_x_output: out std_logic_vector(3 downto 0); -- Output BCD  x
+        bcd_y_output: out std_logic_vector(3 downto 0)  -- Output BCD  y
+    );
+end component;   
+
+component bcd_ascii is
+    port (
+        bcd_x_input: in std_logic_vector(7 downto 0); -- Input BCD (12-digit x 4-bit)
+        bcd_y_input: in std_logic_vector(7 downto 0); -- Input BCD (12-digit x 4-bit)
+        ascii_x_output: out std_logic_vector(3 downto 0); -- Output ASCII (48-bit)
+        ascii_y_output: out std_logic_vector(3 downto 0) -- Output ASCII (48-bit)
+    );
+end component;
+
 begin
-    -- ASCII to BCD conversion for X and Y
-    x_bcd_conversion: entity kalkulator.ascii_bcd
+    -- Konversi ASCII to BCD untuk X dan Y
+    bcd_conversion: ascii_bcd
         port map (
-            ascii_input => x,
-            bcd_output => x_bcd
-        );
+            ascii_x_input => x,
+            bcd_x_output => x_bcd,
+            ascii_y_input => y,
+            bcd_y_output => y_bcd
+        ); 
 
-    y_bcd_conversion: entity kalkulator.ascii_bcd
-        port map (
-            ascii_input => y,
-            bcd_output => y_bcd
-        );
-
-    -- Subtractor in BCD field
+    -- Subtractor dalam BCD
     process(x_bcd, y_bcd)
-        variable temp_difference: integer;
-        variable temp_result: std_logic_vector(47 downto 0);
-        variable borrow: std_logic;
+    variable temp_borrow: integer := 0;
+    variable temp_diff: integer;
+	variable temp_result : std_logic_vector(47 downto 0);
     begin
-        temp_difference := to_integer(unsigned(x_bcd)) - to_integer(unsigned(y_bcd)) - (borrow and 1);
-        
-        -- Iterate for each group of 4 BCD bits from LSB to MSB
-        for i in 11 downto 0 loop
-            temp_difference := to_integer(unsigned(x_bcd(i * BCD_group + BCD_group - 1 downto i * BCD_group))) -
-                                to_integer(unsigned(y_bcd(i * BCD_group + BCD_group - 1 downto i * BCD_group))) -
-                                (borrow and 1);
+	temp_carry <= std_logic_vector(to_unsigned(0, temp_carry'length)); -- Initialize temp_carry
 
-            if temp_difference >= 0 then
-                temp_result(i * BCD_group + BCD_group - 1 downto i * BCD_group) <= std_logic_vector(to_unsigned(temp_difference, BCD_group));
-                borrow := '0';
-            else
-                temp_result(i * BCD_group + BCD_group - 1 downto i * BCD_group) <= std_logic_vector(to_unsigned(temp_difference + 10, BCD_group));
-                borrow := '1';
+        -- Loop 4 BCD dari LSB ke MSB
+        for i in 0 to 11 loop --DIMULAI DARI DIGIT TERENDAH
+        temp_diff := to_integer(unsigned(x_bcd(i * BCD_group + BCD_group - 1 downto i * BCD_group))) - to_integer(unsigned(y_bcd(i * BCD_group + BCD_group - 1 downto i * BCD_group))) - temp_borrow;
+            if (temp_diff >= 0) then --KETIKA DIGIT X > Y
+                temp_diff := to_integer(unsigned(x_bcd(i * BCD_group + BCD_group - 1 downto i * BCD_group))) - to_integer(unsigned(y_bcd(i * BCD_group + BCD_group - 1 downto i * BCD_group))) - temp_borrow;
+                temp_result (i * BCD_group + BCD_group - 1 downto i * BCD_group) := std_logic_vector(to_unsigned(temp_diff, BCD_group));
+                temp_borrow := 0;
+            else --KETIKA DIGIT X < Y, X AKAN DITAMBAH 10 DENGAN MEMINJAM DARI DIGIT SETELAHNYA
+				temp_diff := (to_integer(unsigned(x_bcd(i * BCD_group + BCD_group - 1 downto i * BCD_group))) + 10 ) - to_integer(unsigned(y_bcd(i * BCD_group + BCD_group - 1 downto i * BCD_group)))- temp_borrow;
+                temp_result(i * BCD_group + BCD_group - 1 downto i * BCD_group) := std_logic_vector(to_unsigned(temp_diff, BCD_group));
+                temp_borrow := 1; --DIGIT SETELAHNYA AKAN DIKURANGI 1
+
             end if;
         end loop;
 
-        difference_bcd <= temp_result;
+        -- Hasil ke Result 
+        Result <= temp_result;
 
         -- Error case if the size is greater than 48 bits
-        if difference_bcd'length > 48 then
+        if sum_bcd'length > 48 then
             error_flag <= '1';
         else
             error_flag <= '0';
         end if;
-
-        borrow_out <= borrow;
     end process;
+
+    -- BCD to ASCII conversion for BCD sum
+	sum_ascii_conversion: bcd_ascii
+		port map (
+			bcd_input => sum_bcd,
+			ascii_output => sum_ascii
+		);
 end architecture behavioral;
