@@ -2,16 +2,16 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
-entity adder is
+entity subtractor is
     port (
         x: in std_logic_vector(47 downto 0);
         y: in std_logic_vector(47 downto 0);
         Result: out std_logic_vector(47 downto 0);
         error_flag: out std_logic
     );
-end entity adder;
+end entity subtractor;
 
-architecture behavioral of adder is
+architecture behavioral of subtractor is
     signal x_bcd, y_bcd: std_logic_vector(47 downto 0);
     constant BCD_group : integer := 4;
 
