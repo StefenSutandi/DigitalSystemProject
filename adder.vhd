@@ -15,23 +15,23 @@ end entity adder;
 architecture behavioral of adder is
     signal x_bcd, y_bcd: std_logic_vector(47 downto 0);
     signal sum_bcd1: std_logic_vector(47 downto 0);
-    signal carry: std_logic := '0';  -- Use signal for carry
-    signal temp_carry: std_logic_vector(3 downto 0) := (others => '0');  -- Signal for temp_carry
+    signal carry: std_logic := '0';  
+    signal temp_carry: std_logic_vector(3 downto 0) := (others => '0');  -- Signal utk carry sementara
     constant BCD_group : integer := 4;
 
 component ascii_bcd is
     port(
         ascii_x_input: in std_logic_vector(7 downto 0); -- Input x (ASCII)
         ascii_y_input: in std_logic_vector(7 downto 0); -- Input y (ASCII)
-        bcd_x_output: out std_logic_vector(3 downto 0); -- Output BCD for x
-        bcd_y_output: out std_logic_vector(3 downto 0)  -- Output BCD for y
+        bcd_x_output: out std_logic_vector(3 downto 0); -- Output BCD  x
+        bcd_y_output: out std_logic_vector(3 downto 0)  -- Output BCD  y
     );
 end component;   
 
 component bcd_ascii is
     port (
-        bcd_x_input: in std_logic_vector(7 downto 0); -- Input BCD (12-digit x 4-bit each)
-        bcd_y_input: in std_logic_vector(7 downto 0); -- Input BCD (12-digit x 4-bit each)
+        bcd_x_input: in std_logic_vector(7 downto 0); -- Input BCD (12-digit x 4-bit)
+        bcd_y_input: in std_logic_vector(7 downto 0); -- Input BCD (12-digit x 4-bit)
         ascii_x_output: out std_logic_vector(3 downto 0); -- Output ASCII (48-bit)
         ascii_y_output: out std_logic_vector(3 downto 0) -- Output ASCII (48-bit)
     );
@@ -88,7 +88,4 @@ begin
 			bcd_input => sum_bcd,
 			ascii_output => sum_ascii
 		);
-
-    -- Set the carry_out signal
-    carry_out <= temp_carry;
 end architecture behavioral;
