@@ -70,11 +70,11 @@ begin
         port map (
             x_bcd => dividend_bcd,
             x_bin => dividend_bin,
-            y_bcd => dividend_bcd,
+            y_bcd => divisor_bcd,
             y_bin => divisor_bin,
         );
 	-- Main Process
-    process (dividend, divisor)
+    process (dividend_bin, divisor_bin)
 		-- Variables Declaration
         variable A : std_logic_vector(DATA_WIDTH_BIN downto 0);
 		variable M : std_logic_vector(DATA_WIDTH_BIN downto 0);
@@ -110,7 +110,8 @@ begin
 					Q(0) := '0';
 				end if;			
 			end loop;
-			valid <= '1';		
+			valid <= '1';
+		end if;
 		-- Output Assignments
 		quotient_bin <= Q;
     end process;
