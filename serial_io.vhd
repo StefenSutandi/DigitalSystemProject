@@ -14,12 +14,12 @@ entity serial_io is
 end serial_io;
 
 architecture behavioral of serial_io is
-    signal x, y : signed(47 downto 0); -- Input bilangan pertama dan kedua
+    signal x, y : signed(15 downto 0); -- Input bilangan pertama dan kedua
     signal operation : std_logic; -- Jenis operasi (+, -, /, *)
     signal sequential_process : std_logic; -- Pilihan pemrosesan sekuensial
-    signal result : signed(47 downto 0); -- Hasil operasi
-    signal receive_data : std_logic_vector(47 downto 0); -- Data yang diterima secara serial
-    signal transmit_data : std_logic_vector(47 downto 0); -- Data yang akan dikirim secara serial
+    signal result : signed(15 downto 0); -- Hasil operasi
+    signal receive_data : std_logic_vector(15 downto 0); -- Data yang diterima secara serial
+    signal transmit_data : std_logic_vector(15 downto 0); -- Data yang akan dikirim secara serial
     signal data_ready : std_logic := '0'; -- Flag untuk menandakan data siap dikirim
     signal transmit_counter : integer range 0 to 9 := 0; -- Counter untuk pengiriman data serial
 begin
