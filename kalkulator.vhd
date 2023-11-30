@@ -23,7 +23,7 @@ component serial_io is
         reset : in std_logic; -- Sinyal reset
         serial_in : in std_logic; -- Sinyal input serial
         serial_out : out std_logic; -- Sinyal output serial
-        output_data : out signed(47 downto 0); -- Hasil operasi (maksimal 12 digit)
+        output_data : out signed(15 downto 0); -- Hasil operasi (maksimal 12 digit)
         error_flag : out std_logic -- Flag error
     );
 end component;
@@ -54,20 +54,20 @@ end component;
 
 component comparator_input is
     port (
-        ascii_x_input: in std_logic_vector(47 downto 0); -- Input x (ASCII)
-        ascii_y_input: in std_logic_vector(47 downto 0); -- Input y (ASCII)
+        ascii_x_input: in std_logic_vector(15 downto 0); -- Input x (ASCII)
+        ascii_y_input: in std_logic_vector(15 downto 0); -- Input y (ASCII)
         error_flag: out std_logic;  -- Output error flag
-        bcd_x_output: out std_logic_vector(47 downto 0); -- Output BCD for x
-        bcd_y_output: out std_logic_vector(47 downto 0)  -- Output BCD for y
+        bcd_x_output: out std_logic_vector(15 downto 0); -- Output BCD for x
+        bcd_y_output: out std_logic_vector(15 downto 0)  -- Output BCD for y
     );
 end component;
 
 component ascii_bcd is
     port (
-        ascii_x_input: in std_logic_vector(47 downto 0); -- Input ASCII (48-bit)
-        ascii_y_input: in std_logic_vector(47 downto 0); -- Input ASCII (48-bit)
-        bcd_x_output: out std_logic_vector(47 downto 0); -- Output BCD (12-digit x 4-bit each)
-        bcd_y_output: out std_logic_vector(47 downto 0) -- Output BCD (12-digit x 4-bit each)
+        ascii_x_input: in std_logic_vector(15 downto 0); -- Input ASCII (48-bit)
+        ascii_y_input: in std_logic_vector(15 downto 0); -- Input ASCII (48-bit)
+        bcd_x_output: out std_logic_vector(15 downto 0); -- Output BCD (12-digit x 4-bit each)
+        bcd_y_output: out std_logic_vector(15 downto 0) -- Output BCD (12-digit x 4-bit each)
     );
 end component;
 
@@ -75,7 +75,7 @@ component adder is
     port (
         x: in integer range 0 to 999_999_999_999; -- Maximum 12 digit input
         y: in integer range 0 to 999_999_999_999;
-        sum_bcd: out std_logic_vector(47 downto 0);
+        sum_bcd: out std_logic_vector(15 downto 0);
         carry_out: out std_logic;
         error_flag: out std_logic
     );
@@ -111,16 +111,16 @@ end component;
 
 component bcd_ascii is
     port (
-        bcd_x_input: in std_logic_vector(47 downto 0); -- Input BCD (12-digit x 4-bit each)
-        bcd_y_input: in std_logic_vector(47 downto 0); -- Input BCD (12-digit x 4-bit each)
-        ascii_x_output: out std_logic_vector(47 downto 0); -- Output ASCII (48-bit)
-        ascii_y_output: out std_logic_vector(47 downto 0) -- Output ASCII (48-bit)
+        bcd_x_input: in std_logic_vector(15 downto 0); -- Input BCD (12-digit x 4-bit each)
+        bcd_y_input: in std_logic_vector(15 downto 0); -- Input BCD (12-digit x 4-bit each)
+        ascii_x_output: out std_logic_vector(15 downto 0); -- Output ASCII (48-bit)
+        ascii_y_output: out std_logic_vector(15 downto 0) -- Output ASCII (48-bit)
     );
 end component;
 
 component comparator_output is
     port (
-        bcd_input: in std_logic_vector(48 downto 0); -- Input BCD from mux (48 + 1 bits for sign)
+        bcd_input: in std_logic_vector(15 downto 0); -- Input BCD from mux (48 + 1 bits for sign)
         ascii_output: out std_logic_vector(8 downto 0); -- Output ASCII (+1 for sign bit)
         error_flag: out std_logic  -- Output error flag
     );

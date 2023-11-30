@@ -4,16 +4,16 @@ use ieee.numeric_std.all;
 
 entity comparator_input is
     port (
-        ascii_x_input: in std_logic_vector(47 downto 0); -- Input x (ASCII)
-        ascii_y_input: in std_logic_vector(47 downto 0); -- Input y (ASCII)
+        ascii_x_input: in std_logic_vector(13 downto 0); -- Input x (ASCII)
+        ascii_y_input: in std_logic_vector(13 downto 0); -- Input y (ASCII)
         error_flag: out std_logic;  -- Output error flag
-        bcd_x_output: out std_logic_vector(47 downto 0); -- Output BCD for x
-        bcd_y_output: out std_logic_vector(47 downto 0)  -- Output BCD for y
+        bcd_x_output: out std_logic_vector(15 downto 0); -- Output BCD for x
+        bcd_y_output: out std_logic_vector(15 downto 0)  -- Output BCD for y
     );
 end comparator_input;
 
 architecture behavioral of comparator_input is
-    signal x_bcd, y_bcd: std_logic_vector(47 downto 0);  -- BCD conversion for x and y
+    signal x_bcd, y_bcd: std_logic_vector(15 downto 0);  -- BCD conversion for x and y
 begin
     process(ascii_x_input, ascii_y_input)
     begin
@@ -21,8 +21,8 @@ begin
         variable x_digit: integer;
         x_digit := to_integer(unsigned(ascii_x_input));
         case x_digit is
-            when 48 to 57 =>  -- ASCII values for '0' to '9'
-                bcd_x_output <= std_logic_vector(to_unsigned(x_digit - 48, 4));  -- Convert ASCII to BCD
+            when 15 to 24 =>  -- ASCII values for '0' to '9'
+                bcd_x_output <= std_logic_vector(to_unsigned(x_digit - 15, 4));  -- Convert ASCII to BCD
             when others =>
                 bcd_x_output <= "0000";  -- Output '0000' for invalid ASCII characters
         end case;
@@ -31,17 +31,10 @@ begin
         variable y_digit: integer;
         y_digit := to_integer(unsigned(ascii_y_input));
         case y_digit is
-            when 48 to 57 =>  -- ASCII values for '0' to '9'
-                bcd_y_output <= std_logic_vector(to_unsigned(y_digit - 48, 4));  -- Convert ASCII to BCD
+            when 15 to 24 =>  -- ASCII values for '0' to '9'
+                bcd_y_output <= std_logic_vector(to_unsigned(y_digit - 15, 4));  -- Convert ASCII to BCD
             when others =>
                 bcd_y_output <= "0000";  -- Output '0000' for invalid ASCII characters
         end case;
-
-        -- Comparison logic 
-        if (x_digit > 999_999_999) and (y_digit > 999_999_999) then
-            error_flag <= 'ERROR';  -- Set error flag if both x and y ASCII are greater than 999_999_999
-        else
-            error_flag <= '0';  -- Clear error flag for other conditions
-        end if;
     end process;
 end Behavioral;

@@ -4,14 +4,14 @@ use ieee.numeric_std.all;
 
 entity comparator_output is
     port (
-        bcd_input: in std_logic_vector(48 downto 0); -- Input BCD from mux (48 + 1 bits for sign)
-        ascii_output: out std_logic_vector(48 downto 0); -- Output ASCII (+1 for sign bit)
+        bcd_input: in std_logic_vector(15 downto 0); -- Input BCD from mux (48 + 1 bits for sign)
+        ascii_output: out std_logic_vector(15 downto 0); -- Output ASCII (+1 for sign bit)
         error_flag: out std_logic  -- Output error flag
     );
 end entity comparator_output;
 
 architecture behavioral of comparator_output is
-    signal bcd_value: unsigned(47 downto 0); -- BCD value (48 bits)
+    signal bcd_value: unsigned(15 downto 0); -- BCD value (48 bits)
 
 begin
     process(bcd_input)
@@ -22,7 +22,7 @@ begin
             error_flag <= 'ERROR';  -- Set error flag for BCD input length greater than 48 + 1 bits
         else
             -- Extract BCD value if input length is valid
-            bcd_value <= bcd_input(47 downto 0); -- Extracting the BCD value (ignoring sign bit)
+            bcd_value <= bcd_input(15 downto 0); -- Extracting the BCD value (ignoring sign bit)
 
             -- Convert BCD to ASCII and include the sign bit
             if (bcd_input(48) = '1') then
