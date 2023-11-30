@@ -4,17 +4,17 @@ use IEEE.numeric_std.all;
 
 entity adder is
     port (
-        x: in std_logic_vector(47 downto 0);
-        y: in std_logic_vector(47 downto 0);
+        x: in std_logic_vector(15 downto 0);
+        y: in std_logic_vector(15 downto 0);
         carry_out: out std_logic;
-        sum_bcd: out std_logic_vector(47 downto 0);
+        sum_bcd: out std_logic_vector(15 downto 0);
         error_flag: out std_logic
     );
 end entity adder;
 
 architecture behavioral of adder is
-    signal x_bcd, y_bcd: std_logic_vector(47 downto 0);
-    signal sum_bcd1: std_logic_vector(47 downto 0);
+    signal x_bcd, y_bcd: std_logic_vector(15 downto 0);
+    signal sum_bcd1: std_logic_vector(15 downto 0);
     signal carry: std_logic := '0';  
     signal temp_carry: std_logic_vector(3 downto 0) := (others => '0');  -- Signal utk carry sementara
     constant BCD_group : integer := 4;
@@ -38,7 +38,7 @@ component bcd_ascii is
 end component;
 
 begin
-    -- ASCII to BCD conversion for X and Y
+    -- Konversi ASCII ke BCD untuk X dan Y
     bcd_conversion: ascii_bcd
         port map (
             ascii_x_input => x,
@@ -47,15 +47,15 @@ begin
             bcd_y_output => y_bcd
         ); 
 
-    -- Adder in BCD field
+    -- Adder dalam BCD
     process(x_bcd, y_bcd)
         variable temp_sum: integer;
-        variable temp_result: std_logic_vector(47 downto 0);
+        variable temp_result: std_logic_vector(15 downto 0);
     begin
 	temp_carry <= std_logic_vector(to_unsigned(0, temp_carry'length)); -- Initialize temp_carry
 
-        -- Iterate for each group of 4 BCD bits from LSB to MSB
-        for i in 11 downto 0 loop
+        -- Loop per 4 BCD bit dari LSB ke MSB
+        for i in 3 downto 0 loop
 		temp_sum := to_integer(unsigned(x_bcd(i * BCD_group + BCD_group - 1 downto i * BCD_group))) +
 					to_integer(unsigned(y_bcd(i * BCD_group + BCD_group - 1 downto i * BCD_group))) +
 					to_integer(unsigned(temp_carry));
@@ -71,18 +71,18 @@ begin
             end if;
         end loop;
 
-        -- Assign the final result to the sum_bcd signal
+        -- Hasil masuk ke signal sum_bcd
         sum_bcd <= temp_result;
 
-        -- Error case if the size is greater than 48 bits
-        if sum_bcd'length > 48 then
+        -- Error case untuk hasil lebih besar dari 16 bit
+        if sum_bcd'length > 16 then
             error_flag <= '1';
         else
             error_flag <= '0';
         end if;
     end process;
 
-    -- BCD to ASCII conversion for BCD sum
+    -- Konversi BCD ke ASCII untuk sum_bcd
 	sum_ascii_conversion: bcd_ascii
 		port map (
 			bcd_input => sum_bcd,
