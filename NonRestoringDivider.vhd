@@ -42,6 +42,7 @@ component bcd_bin is
         x_bin : out std_logic_vector(DATA_WIDTH_BIN-1 downto 0);
 		y_bin : out std_logic_vector(DATA_WIDTH_BIN-1 downto 0)
     );
+end component;
 component bin_bcd is
     port(
         x_bin : in std_logic_vector(DATA_WIDTH_BIN-1 downto 0);
@@ -119,7 +120,9 @@ begin
 	bin_to_bcd_conversion_quotient : bin_bcd
 		port map (
 			x_bin => quotient_bin,
-			x_bcd => quotient_bcd
+			x_bcd => quotient_bcd,
+			y_bin => open,
+			y_bcd => open
 		);
 	-- BCD to ASCII Conversion for Quoutient
 	bcd_to_ascii_conversion_quotient : bcd_ascii
