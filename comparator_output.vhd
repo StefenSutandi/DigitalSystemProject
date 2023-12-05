@@ -3,20 +3,25 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity comparator_output is
+	generic (
+		DATA_WIDTH_ASCII : positive := 32;
+		DATA_WIDTH_BCD : positive := 16;
+		DATA_WIDTH_BIN : positive := 14
+	);
     port (
-        bcd_input: in std_logic_vector(15 downto 0); -- Input BCD from mux (48 + 1 bits for sign)
-        ascii_output: out std_logic_vector(15 downto 0); -- Output ASCII (+1 for sign bit)
+        x : in std_logic_vector(DATA_WIDTH_ASCII-1 downto 0); -- Input BCD from mux (48 + 1 bits for sign)
+--      ascii_output: out std_logic_vector(15 downto 0); -- Output ASCII (+1 for sign bit)
         error_flag: out std_logic  -- Output error flag
     );
 end entity comparator_output;
 
 architecture behavioral of comparator_output is
-    signal bcd_value: unsigned(15 downto 0); -- BCD value (48 bits)
+--  signal bcd_value: unsigned(15 downto 0); -- BCD value (48 bits)
 
 begin
-    process(bcd_input)
+    process(X)
     begin
-        -- Check for invalid BCD input length (more than 48 + 1 bits)
+/*      -- Check for invalid BCD input length (more than 48 + 1 bits)
         if bcd_input'length > 49 then
             ascii_output <= "000000000"; -- Output '0' for invalid BCD characters (+1 for sign bit)
             error_flag <= 'ERROR';  -- Set error flag for BCD input length greater than 48 + 1 bits
@@ -41,5 +46,11 @@ begin
                 end if;
             end if;
         end if;
+*/
+		if x'length > DATA_WIDTH_ASCII then
+			error_flag <= '1';
+		else
+			error_flag <= '0';
+		end if;
     end process;
 end behavioral;
