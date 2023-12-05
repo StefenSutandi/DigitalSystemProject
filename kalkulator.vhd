@@ -6,11 +6,17 @@ use ieee.math_real.all;
 use work.all;
 
 entity kalkulator is -- Set as top-level-entity
+	generic (
+		DATA_WIDTH_ASCII : positive := 32;
+		DATA_WIDTH_BCD : positive := 16;
+		DATA_WIDTH_BIN : positive := 14
+	);
     port (
-        input_x, input_y: in std_logic_vector(47 downto 0);
+        input_x : in std_logic_vector(DATA_WIDTH_ASCII-1 downto 0);
+		input_y : in std_logic_vector(DATA_WIDTH_ASCII-1 downto 0);
         operation_choice: in std_logic_vector(1 downto 0);
         sequential_mode: in std_logic_vector(1 downto 0);
-        output_data: out std_logic_vector(47 downto 0);
+        output_data: out std_logic_vector(DATA_WIDTH_ASCII-1 downto 0);
         display_error: out std_logic
     );
 end kalkulator;
@@ -62,14 +68,22 @@ component comparator_input is
     );
 end component;
 
-component ascii_bcd is
+component ascii_bcdo is
     port (
-        ascii_x_input: in std_logic_vector(15 downto 0); -- Input ASCII (48-bit)
-        ascii_y_input: in std_logic_vector(15 downto 0); -- Input ASCII (48-bit)
-        bcd_x_output: out std_logic_vector(15 downto 0); -- Output BCD (12-digit x 4-bit each)
-        bcd_y_output: out std_logic_vector(15 downto 0) -- Output BCD (12-digit x 4-bit each)
+        input_ascii_x : in std_logic_vector(DATA_WIDTH_ASCII-1 downto 0);
+        input_ascii_y : in std_logic_vector(DATA_WIDTH_ASCII-1 downto 0);
+        output_bcd_x : out std_logic_vector(DATA_WIDTH_BCD-1 downto 0);
+        output_bcd_y : out std_logic_vector(DATA_WIDTH_BCD-1 downto 0)
     );
 end component;
+
+component bcd_bin is
+	port(
+		x_bcd : in std_logic_vector(DATA_WIDTH_BCD-1 downto 0);
+		y_bcd : in std_logic_vector(DATA_WIDTH_BCD-1 downto 0);
+        x_bin : out std_logic_vector(DATA_WIDTH_BIN-1 downto 0)
+		y_bin : out std_logic_vector(DATA_WIDTH_BIN-1 downto 0)
+	);
 
 component adder is
     port (
@@ -91,30 +105,34 @@ component subtractor is
     );
 end component;
 
-component multiplier is
+component multiplierbin is
     port (
-        x: in integer range 0 to 999_999_999_999; 
-        y: in integer range 0 to 999_999_999_999;
-        error_flag: out std_logic;  -- Output error flag
-        output_result: out std_logic_vector(48 downto 0) -- Output result (48-bit + 1 sign bit)
+        x :	in std_logic_vector(DATA_WIDTH_BIN-1 downto 0);
+		y :	in std_logic_vector(DATA_WIDTH_BIN-1 downto 0);
+	    hasil : out std_logic_vector(DATA_WIDTH_BIN-1 downto 0);
+      error_flag : out std_logic
     );
 end component;
 
 component divider is
     port (
-        x: in integer range 0 to 999_999_999_999; 
-        y: in integer range 0 to 999_999_999_999;
-        error_flag: out std_logic;  -- Output error flag
-        output_result: out std_logic_vector(48 downto 0) -- Output result (48-bit + 1 sign bit)
+        dividend_ascii : in std_logic_vector(DATA_WIDTH_ASCII-1 downto 0);
+        divisor_ascii : in std_logic_vector(DATA_WIDTH_ASCII-1 downto 0);
+        quotient_ascii : out std_logic_vector(DATA_WIDTH_ASCII-1 downto 0);
+        error_flag : out std_logic
     );
 end component;
 
+component bin_bcd is
+	port(
+		hasil_bin : in std_logic_vector(DATA_WIDTH_BIN-1 downto 0);
+        hasil_bcd : out std_logic_vector(DATA_WIDTH_BCD-1 downto 0)
+	);
+
 component bcd_ascii is
     port (
-        bcd_x_input: in std_logic_vector(15 downto 0); -- Input BCD (12-digit x 4-bit each)
-        bcd_y_input: in std_logic_vector(15 downto 0); -- Input BCD (12-digit x 4-bit each)
-        ascii_x_output: out std_logic_vector(15 downto 0); -- Output ASCII (48-bit)
-        ascii_y_output: out std_logic_vector(15 downto 0) -- Output ASCII (48-bit)
+        bcd_input : in STD_LOGIC_VECTOR(DATA_WIDTH_BCD-1 downto 0);
+        ascii_output : out STD_LOGIC_VECTOR(DATA_WIDTH_ASCII-1 downto 0)
     );
 end component;
 
