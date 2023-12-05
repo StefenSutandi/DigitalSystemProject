@@ -7,8 +7,7 @@ use ieee.std_logic_unsigned.all;
 -- Dua input dalam Biner
 entity multiplierbin is
 port(	x, y:	in std_logic_vector(13 downto 0);
-	    hasil: 	out std_logic_vector(13 downto 0);
-      error_flag: out std_logic
+	    hasil: 	out std_logic_vector(13 downto 0)
 );
 end multiplierbin;
 
@@ -21,7 +20,6 @@ process(x, y)
 	
   variable x_reg: std_logic_vector(14 downto 0);
   variable hasil_reg: std_logic_vector(27 downto 0);
-
 begin	 	
   x_reg := "0" & x;
   hasil_reg := "00000000000000" & y;
@@ -37,10 +35,10 @@ begin
   -- Output
   hasil <= hasil_reg(13 downto 0);
 
-  if sum_bcd'length > 16 then
-    error_flag <= '1';
+  if hasil_reg > "0000000000000010011100001111" then
+    hasil <= "10011100001111";
   else
-    error_flag <= '0';
+    hasil <= hasil_reg(13 downto 0);
   end if;
 
 end process;
