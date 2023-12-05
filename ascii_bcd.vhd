@@ -2,12 +2,12 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
-entity ascii_bcdo is
+entity ascii_bcd is
     port (
         input_ascii_x, input_ascii_y: in std_logic_vector(31 downto 0);
         output_bcd_x, output_bcd_y: out std_logic_vector(15 downto 0)
     );
-end ascii_bcdo;
+end ascii_bcd;
 
 architecture behavioral of ascii_bcd is
 begin

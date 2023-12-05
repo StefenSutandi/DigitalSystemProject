@@ -37,4 +37,4 @@ begin
                 bcd_y_output <= "0000";  -- Output '0000' for invalid ASCII characters
         end case;
     end process;
-end Behavioral;
+end behavioral;

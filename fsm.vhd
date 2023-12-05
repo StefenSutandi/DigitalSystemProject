@@ -8,13 +8,13 @@ generic (
 		DATA_WIDTH_ASCII : positive := 32;
 		DATA_WIDTH_BCD : positive := 16;
 		DATA_WIDTH_BIN : positive := 14
-	)
+	);
     port(
 		reset : in std_logic;
 		clock : in std_logic;		
 		y : in std_logic_vector(DATA_WIDTH_ASCII-1 downto 0);		
 		operation : in std_logic_vector(1 downto 0);
-		sequential_mode : in std_logic;
+		sequential_mode1 : in std_logic_vector(13 down to 0);
 		error_flag : buffer std_logic;
 		x : buffer std_logic_vector(DATA_WIDTH_ASCII-1 downto 0);
 		z : buffer std_logic_vector(DATA_WIDTH_ASCII-1 downto 0)
@@ -22,7 +22,7 @@ generic (
 end fsm;
 
 architecture behavioral of fsm is
-    type states is (idle, mux, adder, subtractor, multiplier, divider, sequential_state, display);
+    type states is (idle, mux1, adder1, subtractor1, multiplier1, divider1, sequential_state, display);
     signal cState, nState: states;
     signal z_adder, z_subtractor, z_multiplier, z_divider, z_result, new_x : std_logic_vector(DATA_WIDTH_ASCII-1 downto 0);
     constant zero: std_logic_vector(DATA_WIDTH_ASCII-1 downto 0) := (others => '0');
@@ -42,25 +42,25 @@ architecture behavioral of fsm is
 						if error_flag = '1' then
 							nState <= idle;
 						else
-							nState <= mux;
+							nState <= mux1;
 						end if;
 						z <= zero;
-					when mux =>
+					when mux1 =>
 						if error_flag = '1' then
 							nState <= idle;
 						else
 							if operation = "00" then
-								nState <= adder;
+								nState <= adder1;
 							elsif operation = "01" then
-								nState <= subtractor;
+								nState <= subtractor1;
 							elsif operation = "10" then
-								nState <= multiplier;
+								nState <= multiplier1;
 							else
-								nState <= divider;
+								nState <= divider1;
 							end if;
 						end if;
 						z <= zero;
-					when adder =>
+					when adder1 =>
 						if error_flag = '1' then
 							nState <= idle;
 						else
@@ -73,7 +73,7 @@ architecture behavioral of fsm is
 						z <= z_adder;
 						z_result <= z;
 						new_x <= z_result;
-					when subtractor =>
+					when subtractor1 =>
 						if error_flag = '1' then
 							nState <= idle;
 						else
@@ -86,7 +86,7 @@ architecture behavioral of fsm is
 						z <= z_subtractor;
 						z_result <= z;
 						new_x <= z;
-					when multiplier =>
+					when multiplier1 =>
 						if error_flag = '1' then
 							nState <= idle;
 						else
@@ -99,7 +99,7 @@ architecture behavioral of fsm is
 						z <= z_multiplier;
 						z_result <= z;
 						new_x <= z;
-					when divider =>
+					when divider1 =>
 						if error_flag = '1' then
 							nState <= idle;
 						else
@@ -117,13 +117,13 @@ architecture behavioral of fsm is
 							nState <= idle;
 						else
 							if operation = "00" then
-								nState <= adder;
+								nState <= adder1;
 							elsif operation = "01" then
-								nState <= subtractor;
+								nState <= subtractor1;
 							elsif operation = "10" then
-								nState <= multiplier;
+								nState <= multiplier1;
 							else
-								nState <= divider;
+								nState <= divider1;
 							end if;
 						end if;
 						z <= z_result;

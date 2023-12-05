@@ -1,39 +1,48 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
-use ieee.std_logic_arith.all;
 use ieee.std_logic_unsigned.all;
 use ieee.math_real.all;
 use work.all;
 
-entity kalkulator is -- Set as top-level-entity
+entity kalkulator is
+    generic (
+        DATA_WIDTH_ASCII : positive := 32;
+        DATA_WIDTH_BCD : positive := 16;
+        DATA_WIDTH_BIN : positive := 14
+    );
     port (
-        input_x, input_y: in std_logic_vector(47 downto 0);
+        input_x : in std_logic_vector(DATA_WIDTH_ASCII-1 downto 0);
+        input_y : in std_logic_vector(DATA_WIDTH_ASCII-1 downto 0);
         operation_choice: in std_logic_vector(1 downto 0);
-        sequential_mode: in std_logic_vector(1 downto 0);
-        output_data: out std_logic_vector(47 downto 0);
+        sequential_mode: in std_logic_vector(13 downto 0);
+        output_data: out std_logic_vector(DATA_WIDTH_ASCII-1 downto 0);
         display_error: out std_logic
     );
 end kalkulator;
 
+
+
 architecture kalkulator_arc of kalkulator is
 
-component serial_io is
-    port (
-        clk : in std_logic; -- Sinyal clock
-        reset : in std_logic; -- Sinyal reset
-        serial_in : in std_logic; -- Sinyal input serial
-        serial_out : out std_logic; -- Sinyal output serial
-        output_data : out signed(47 downto 0); -- Hasil operasi (maksimal 12 digit)
-        error_flag : out std_logic -- Flag error
-    );
-end component;
+type states is (idle, mux1, adder1, subtractor1, multiplier1, divider1, sequential_state, display);
+signal reset, clock : std_logic;
+signal sequential_mode1 : std_logic_vector(13 downto 0);
+signal temp_output : signed(3 downto 0); 
+signal adder_mux, subtractor, multiplier, divider: signed(DATA_WIDTH_BIN-1 downto 0);
+
 
 component fsm is
     port(
-        rst, clk, proceed: in std_logic;
-        comparison: in std_logic_vector( 1 downto 0 );
-        enable, xsel, ysel, xld, yld: out std_logic
+		reset : in std_logic;
+		clock : in std_logic;		
+		y : in std_logic_vector(DATA_WIDTH_ASCII-1 downto 0);		
+		operation : in std_logic_vector(1 downto 0);
+		sequential_mode1 : in std_logic_vector(13 downto 0);
+		error_flag : buffer std_logic;
+        cState, nState: in states;
+		x : in std_logic_vector(DATA_WIDTH_ASCII-1 downto 0);
+		z : buffer std_logic_vector(DATA_WIDTH_ASCII-1 downto 0)
         );
 end component;
         
@@ -55,88 +64,131 @@ end component;
 
 component comparator_input is
     port (
-        ascii_x_input: in std_logic_vector(47 downto 0); -- Input x (ASCII)
-        ascii_y_input: in std_logic_vector(47 downto 0); -- Input y (ASCII)
+        ascii_x_input: in std_logic_vector(15 downto 0); -- Input x (ASCII)
+        ascii_y_input: in std_logic_vector(15 downto 0); -- Input y (ASCII)
         error_flag: out std_logic;  -- Output error flag
-        bcd_x_output: out std_logic_vector(47 downto 0); -- Output BCD for x
-        bcd_y_output: out std_logic_vector(47 downto 0)  -- Output BCD for y
+        bcd_x_output: out std_logic_vector(15 downto 0); -- Output BCD for x
+        bcd_y_output: out std_logic_vector(15 downto 0)  -- Output BCD for y
     );
 end component;
 
-component ascii_bcd is
+component ascii_bcdo is
     port (
-        ascii_x_input: in std_logic_vector(47 downto 0); -- Input ASCII (48-bit)
-        ascii_y_input: in std_logic_vector(47 downto 0); -- Input ASCII (48-bit)
-        bcd_x_output: out std_logic_vector(47 downto 0); -- Output BCD (12-digit x 4-bit each)
-        bcd_y_output: out std_logic_vector(47 downto 0) -- Output BCD (12-digit x 4-bit each)
+        input_ascii_x : in std_logic_vector(DATA_WIDTH_ASCII-1 downto 0);
+        input_ascii_y : in std_logic_vector(DATA_WIDTH_ASCII-1 downto 0);
+        output_bcd_x : out std_logic_vector(DATA_WIDTH_BCD-1 downto 0);
+        output_bcd_y : out std_logic_vector(DATA_WIDTH_BCD-1 downto 0)
     );
+end component;
+
+component bcd_bin is
+	port(
+		x_bcd : in std_logic_vector(DATA_WIDTH_BCD-1 downto 0);
+		y_bcd : in std_logic_vector(DATA_WIDTH_BCD-1 downto 0);
+        x_bin : out std_logic_vector(DATA_WIDTH_BIN-1 downto 0);
+		y_bin : out std_logic_vector(DATA_WIDTH_BIN-1 downto 0)
+	);
 end component;
 
 component adder is
     port (
-        x: in integer range 0 to 999_999_999_999; -- Maximum 12 digit input
-        y: in integer range 0 to 999_999_999_999;
-        sum_bcd: out std_logic_vector(47 downto 0);
-        carry_out: out std_logic;
-        error_flag: out std_logic
+        Clk, reset_count, Load : in  std_logic;
+        X, Y              : in  std_logic_vector(13 downto 0);
+        Ready             : out std_logic;
+        Sum               : out std_logic_vector(13 downto 0)
     );
 end component;
 
 component subtractor is
     port (
-        x: in integer range 0 to 999_999_999_999; -- Maximum 12 digit input
-        y: in integer range 0 to 999_999_999_999;
-        difference_bcd: out std_logic_vector(47 downto 0);
-        borrow_out: out std_logic;
-        error_flag: out std_logic
-    );
+		clk: in std_logic;
+        x, y: in std_logic_vector(13 downto 0);
+        Result: out std_logic_vector(13 downto 0)
+		);
 end component;
 
-component multiplier is
+component multiplierbin is
     port (
-        x: in integer range 0 to 999_999_999_999; 
-        y: in integer range 0 to 999_999_999_999;
-        error_flag: out std_logic;  -- Output error flag
-        output_result: out std_logic_vector(48 downto 0) -- Output result (48-bit + 1 sign bit)
+        x :	in std_logic_vector(DATA_WIDTH_BIN-1 downto 0);
+		y :	in std_logic_vector(DATA_WIDTH_BIN-1 downto 0);
+	    hasil : out std_logic_vector(DATA_WIDTH_BIN-1 downto 0);
+      error_flag : out std_logic
     );
 end component;
 
 component divider is
     port (
-        x: in integer range 0 to 999_999_999_999; 
-        y: in integer range 0 to 999_999_999_999;
-        error_flag: out std_logic;  -- Output error flag
-        output_result: out std_logic_vector(48 downto 0) -- Output result (48-bit + 1 sign bit)
+        dividend_ascii : in std_logic_vector(DATA_WIDTH_ASCII-1 downto 0);
+        divisor_ascii : in std_logic_vector(DATA_WIDTH_ASCII-1 downto 0);
+        quotient_ascii : out std_logic_vector(DATA_WIDTH_ASCII-1 downto 0);
+        error_flag : out std_logic
     );
+end component;
+
+component bin_bcd is
+	port(
+		hasil_bin : in std_logic_vector(DATA_WIDTH_BIN-1 downto 0);
+        hasil_bcd : out std_logic_vector(DATA_WIDTH_BCD-1 downto 0)
+	);
 end component;
 
 component bcd_ascii is
     port (
-        bcd_x_input: in std_logic_vector(47 downto 0); -- Input BCD (12-digit x 4-bit each)
-        bcd_y_input: in std_logic_vector(47 downto 0); -- Input BCD (12-digit x 4-bit each)
-        ascii_x_output: out std_logic_vector(47 downto 0); -- Output ASCII (48-bit)
-        ascii_y_output: out std_logic_vector(47 downto 0) -- Output ASCII (48-bit)
+        bcd_input : in STD_LOGIC_VECTOR(DATA_WIDTH_BCD-1 downto 0);
+        ascii_output : out STD_LOGIC_VECTOR(DATA_WIDTH_ASCII-1 downto 0)
     );
 end component;
 
 component comparator_output is
     port (
-        bcd_input: in std_logic_vector(48 downto 0); -- Input BCD from mux (48 + 1 bits for sign)
+        bcd_input: in std_logic_vector(15 downto 0); -- Input BCD from mux (48 + 1 bits for sign)
         ascii_output: out std_logic_vector(8 downto 0); -- Output ASCII (+1 for sign bit)
         error_flag: out std_logic  -- Output error flag
     );
 end component;
 
+signal cState, nState: states;
+signal zAdder, zSubtractor, zMultiplier, zDivider, zResult, newX: std_logic_vector(DATA_WIDTH_ASCII-1 downto 0);
+
 begin
 	--REPRESENTASI PORT MAP
-	X_SER 		: serial_io port map(x_bcd, y_bcd, sum_bcd, carry, temp_carry);
-	X_FSM 		: fsm port map(cState, nState, states, zAdder, zSubtractor, zMultiplier, zDivider, zResult, newX);
-	X_REGIS		: regis port map(input,output);
-	X_MUX		: mux port map(temp_output);
-	X_COM_IN	: comparator input port map(x_bcd,y_bcd);
+    X_FSM : fsm
+        port map (
+            reset => reset,
+            clock => clock,
+            y => input_y,
+            operation => operation_choice,
+            sequential_mode1 => sequential_mode1,
+            error_flag => display_error,
+            cState => cState,
+            nState => nState,
+            x => input_x,
+            z => output_data
+        );
+  
+    X_REGIS : regis
+        port map (
+            rst => reset,
+            clk => clock,
+            load => '1',
+            input => input_x,
+            output => output_data
+        );        
+
+    X_MUX : mux
+    port map (
+        selector => operation_choice,
+        adder => adder_mux,
+        subtractor => subtractor,
+        multiplier => multiplier,
+        divider => divider,
+        output_selector => temp_output
+    );    
+
+	X_COM_IN	: comparator_input port map(x_bcd,y_bcd);
 	X_AS_BCD	: ascii_bcd port map(ascii_x_input, ascii_y_input, bcd_x_input, bcd_y_input);
-	X_ADD		: adder port map(x_bcd, y_bcd, sum_bcd, carry, temp_carry);
-	X_SUB		: subtractor port map(x_bcd, y_bcd, difference_bcd, borrow);
+	X_ADD		: adder port map(Clk, reset_count, Load, A, B, Ready, Sum);
+	X_SUB		: subtractor port map(clk, x, y, Result);
 	X_MULTI		: multiplier port map(x_bcd, y_bcd, x_multi, y_multi, sum_bcd, temp_multi, carry, temp_carry);
 	X_DIV		: divider port map(x_bcd, y_bcd, result_bcd);
 	X_BCD_AS	: bcd_ascii port map(bcd_x_input, bcd_y_input, ascii_x_output, ascii_y_output);
