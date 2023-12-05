@@ -153,7 +153,7 @@ begin
 	X_MUX		: mux port map(temp_output);
 	X_COM_IN	: comparator_input port map(x_bcd,y_bcd);
 	X_AS_BCD	: ascii_bcd port map(ascii_x_input, ascii_y_input, bcd_x_input, bcd_y_input);
-	X_ADD		: adder port map(x_bcd, y_bcd, sum_bcd, carry, temp_carry);
+	X_ADD		: adder port map(Clk, reset_count, Load, A, B, Ready, Sum)
 	X_SUB		: subtractor port map(x_bcd, y_bcd, difference_bcd, borrow);
 	X_MULTI		: multiplier port map(x_bcd, y_bcd, x_multi, y_multi, sum_bcd, temp_multi, carry, temp_carry);
 	X_DIV		: divider port map(x_bcd, y_bcd, result_bcd);
