@@ -84,14 +84,14 @@ component bcd_bin is
         x_bin : out std_logic_vector(DATA_WIDTH_BIN-1 downto 0)
 		y_bin : out std_logic_vector(DATA_WIDTH_BIN-1 downto 0)
 	);
+end component;
 
 component adder is
     port (
-        x: in integer range 0 to 999_999_999_999; -- Maximum 12 digit input
-        y: in integer range 0 to 999_999_999_999;
-        sum_bcd: out std_logic_vector(15 downto 0);
-        carry_out: out std_logic;
-        error_flag: out std_logic
+        Clk, reset_count, Load : in  std_logic;
+        A, B              : in  std_logic_vector(13 downto 0);
+        Ready             : out std_logic;
+        Sum               : out std_logic_vector(13 downto 0)
     );
 end component;
 
@@ -128,6 +128,7 @@ component bin_bcd is
 		hasil_bin : in std_logic_vector(DATA_WIDTH_BIN-1 downto 0);
         hasil_bcd : out std_logic_vector(DATA_WIDTH_BCD-1 downto 0)
 	);
+end component;
 
 component bcd_ascii is
     port (
