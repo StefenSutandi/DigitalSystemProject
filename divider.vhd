@@ -27,7 +27,7 @@ architecture behavioral of divider is
 	signal divisor_bin : std_logic_vector(DATA_WIDTH_BIN-1 downto 0);
 	signal quotient_bin : std_logic_vector(DATA_WIDTH_BIN-1 downto 0);
 -- Components Declaration
-component ascii_bcdo is
+component ascii_bcd is
     port(
         input_ascii_x : in std_logic_vector(DATA_WIDTH_ASCII-1 downto 0);
         input_ascii_y : in std_logic_vector(DATA_WIDTH_ASCII-1 downto 0);
