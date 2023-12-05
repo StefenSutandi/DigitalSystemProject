@@ -4,47 +4,25 @@ use IEEE.std_logic_arith.all;
 use ieee.std_logic_unsigned.all;
 
 
--- Dua input dalam BCD
+-- Dua input dalam Biner
 entity multiplierbin is
-port(	xin, yin:	in std_logic_vector(15 downto 0);
-	    hasil_out: 	out std_logic_vector(15 downto 0)
+port(	x, y:	in std_logic_vector(13 downto 0);
+	    hasil: 	out std_logic_vector(13 downto 0);
+      error_flag: out std_logic
 );
 end multiplierbin;
 
 architecture behavioral of multiplierbin is
-    signal x, y: std_logic_vector(13 downto 0);
-    signal hasil: std_logic_vector(13 downto 0);
-
-component bcd_bin is
-  port (
-        x_bcd, y_bcd: in std_logic_vector(15 downto 0);
-        x_bin, y_bin: out std_logic_vector(13 downto 0)
-    );
-end component;
-
-component bin_bcd is
-  port (
-    hasil_bin: in std_logic_vector(13 downto 0);
-    hasil_bcd: out std_logic_vector(15 downto 0)
-);
-end component; 
-
-begin
-  bin_conversion: bcd_bin
-    port map(
-      x_bcd => xin,
-      y_bcd => yin,
-      x_bin => x,
-      y_bin => y
-    );
 
 -- multiplier dalam Biner
+begin
+
 process(x, y)
 	
   variable x_reg: std_logic_vector(14 downto 0);
   variable hasil_reg: std_logic_vector(27 downto 0);
-begin	 
-	
+
+begin	 	
   x_reg := "0" & x;
   hasil_reg := "00000000000000" & y;
 
@@ -59,12 +37,12 @@ begin
   -- Output
   hasil <= hasil_reg(13 downto 0);
 
-end process;
+  if sum_bcd'length > 16 then
+    error_flag <= '1';
+  else
+    error_flag <= '0';
+  end if;
 
-bcd_conversion: bin_bcd
-      port map(
-        hasil_bin => hasil,
-        hasil_bcd => hasil_out
-      );
+end process;
 
 end behavioral;
