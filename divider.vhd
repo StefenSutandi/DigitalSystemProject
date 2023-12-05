@@ -4,7 +4,7 @@ use IEEE.std_logic_arith.all;
 use IEEE.std_logic_unsigned.all;
 
 -- Entity Declaration
-entity NonRestoringDivider is
+entity divider is
 	generic (
 		DATA_WIDTH_ASCII : positive := 32;
 		DATA_WIDTH_BCD : positive := 16;
@@ -14,12 +14,12 @@ entity NonRestoringDivider is
         dividend_ascii : in std_logic_vector(DATA_WIDTH_ASCII-1 downto 0);
         divisor_ascii : in std_logic_vector(DATA_WIDTH_ASCII-1 downto 0);
         quotient_ascii : out std_logic_vector(DATA_WIDTH_ASCII-1 downto 0);
-        valid: out std_logic
+        error_flag: out std_logic
     );	
-end entity NonRestoringDivider;
+end entity divider;
 
 -- Architecture Implementation
-architecture Behavioral of NonRestoringDivider is
+architecture behavioral of divider is
 	signal dividend_bcd : std_logic_vector(DATA_WIDTH_BCD-1 downto 0);
 	signal divisor_bcd : std_logic_vector(DATA_WIDTH_BCD-1 downto 0);
 	signal quotient_bcd : std_logic_vector(DATA_WIDTH_BCD-1 downto 0);
@@ -27,12 +27,12 @@ architecture Behavioral of NonRestoringDivider is
 	signal divisor_bin : std_logic_vector(DATA_WIDTH_BIN-1 downto 0);
 	signal quotient_bin : std_logic_vector(DATA_WIDTH_BIN-1 downto 0);
 -- Components Declaration
-component ascii_bcd is
+component ascii_bcdo is
     port(
-        ascii_x_input : in std_logic_vector(DATA_WIDTH_ASCII-1 downto 0);
-        ascii_y_input : in std_logic_vector(DATA_WIDTH_ASCII-1 downto 0);
-        bcd_x_output : out std_logic_vector(DATA_WIDTH_BCD-1 downto 0);
-        bcd_y_output : out std_logic_vector(DATA_WIDTH_BCD-1 downto 0)
+        input_ascii_x : in std_logic_vector(DATA_WIDTH_ASCII-1 downto 0);
+        input_ascii_y : in std_logic_vector(DATA_WIDTH_ASCII-1 downto 0);
+        output_bcd_x : out std_logic_vector(DATA_WIDTH_BCD-1 downto 0);
+        output_bcd_y : out std_logic_vector(DATA_WIDTH_BCD-1 downto 0)
     );
 end component;
 component bcd_bin is
@@ -45,10 +45,8 @@ component bcd_bin is
 end component;
 component bin_bcd is
     port(
-        x_bin : in std_logic_vector(DATA_WIDTH_BIN-1 downto 0);
-		y_bin : in std_logic_vector(DATA_WIDTH_BIN-1 downto 0);
-        x_bcd : out std_logic_vector(DATA_WIDTH_BCD-1 downto 0);
-		y_bcd : out std_logic_vector(DATA_WIDTH_BCD-1 downto 0)
+        hasil_bin : in std_logic_vector(DATA_WIDTH_BIN-1 downto 0);
+        hasil_bcd : out std_logic_vector(DATA_WIDTH_BCD-1 downto 0)
     );
 end component;
 component bcd_ascii is
@@ -59,12 +57,12 @@ component bcd_ascii is
 end component;
 begin
 	-- ASCII to BCD Conversion for Dividend and Divisor
-    ascii_to_bcd_conversion_dividend_divisor : ascii_bcd
+    ascii_to_bcd_conversion_dividend_divisor : ascii_bcdo
         port map (
-            ascii_x_input => dividend_ascii,
-            bcd_x_output => dividend_bcd,
-            ascii_y_input => divisor_ascii,
-            bcd_y_output => divisor_bcd,
+            input_ascii_x => dividend_ascii,
+            output_bcd_x => dividend_bcd,
+            input_ascii_y => divisor_ascii,
+            output_bcd_y => divisor_bcd
         );
 	-- BCD to Binary Conversion for Dividend and Divisor
     bcd_to_binary_conversion_dividend_divisor : bcd_bin
@@ -72,7 +70,7 @@ begin
             x_bcd => dividend_bcd,
             x_bin => dividend_bin,
             y_bcd => divisor_bcd,
-            y_bin => divisor_bin,
+            y_bin => divisor_bin
         );
 	-- Main Process
     process (dividend_bin, divisor_bin)
@@ -88,11 +86,11 @@ begin
 		-- Zero Divisor Case
 		if M = "00000000000000" then
 			Q := (others => '0');
-			valid <= '0';
+			error_flag <= '1';
 		-- Dividend Less than Divisor Case
 		elsif Q < M then
 			Q := (others => '0');
-			valid <= '1';			
+			error_flag <= '0';			
 		else
 			-- Division Operation
 			for i in DATA_WIDTH_BIN-1 downto 0 loop			
@@ -111,7 +109,7 @@ begin
 					Q(0) := '0';
 				end if;			
 			end loop;
-			valid <= '1';
+			error_flag <= '0';
 		end if;
 		-- Output Assignments
 		quotient_bin <= Q;
@@ -119,15 +117,13 @@ begin
 	-- Binary to BCD Conversion for Quotient
 	bin_to_bcd_conversion_quotient : bin_bcd
 		port map (
-			x_bin => quotient_bin,
-			x_bcd => quotient_bcd,
-			y_bin => open,
-			y_bcd => open
+			hasil_bin => quotient_bin,
+			hasil_bcd => quotient_bcd
 		);
-	-- BCD to ASCII Conversion for Quoutient
+	 --BCD to ASCII Conversion for Quoutient
 	bcd_to_ascii_conversion_quotient : bcd_ascii
 		port map (
 			bcd_input => quotient_bcd,
 			ascii_output => quotient_ascii
 		);
-end architecture Behavioral;
+end architecture behavioral;
