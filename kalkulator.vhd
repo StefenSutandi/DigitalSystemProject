@@ -28,7 +28,8 @@ architecture kalkulator_arc of kalkulator is
     signal result_add, result_sub, result_mul, result_div: std_logic_vector(13 downto 0);
     signal output_ascii: std_logic_vector(31 downto 0);
     signal temp_output : std_logic_vector(13 downto 0);
-
+    signal adder_error, divider_error : std_logic;
+    signal result_error : std_logic;
 
 
   component mux is
@@ -124,7 +125,7 @@ begin
             Y => y_bin,
             Ready => open,
             Sum => result_add,
-            error_flag => display_error
+            error_flag => adder_error
         );
 
     X_SUB : subtractor 
@@ -147,7 +148,7 @@ begin
             dividend => x_bin,
             divisor => y_bin,
             quotient => result_div,
-            error_flag => display_error
+            error_flag => divider_error
         );
 
     X_BIN_AS : bin_ascii 
@@ -156,6 +157,8 @@ begin
             x_ascii_out => output_ascii
         );
 
+    result_error <= adder_error or divider_error;
+    display_error <= result_error;
 
     output_data <= output_ascii;
 
