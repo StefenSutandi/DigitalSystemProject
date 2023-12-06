@@ -123,7 +123,7 @@ begin
             X => x_bin,
             Y => y_bin,
             Ready => open,
-            Sum => result_add
+            Sum => result_add,
             error_flag => display_error
         );
 
