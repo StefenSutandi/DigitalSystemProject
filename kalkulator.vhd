@@ -17,7 +17,8 @@ entity kalkulator is
         input_y : in std_logic_vector(DATA_WIDTH_ASCII-1 downto 0);
         operation_choice: in std_logic_vector(1 downto 0);
         output_data: out std_logic_vector(DATA_WIDTH_ASCII-1 downto 0);
-        display_error: out std_logic
+        display_error: out std_logic;
+        adder_ready : out std_logic
     );
 end entity kalkulator;
 
@@ -123,7 +124,7 @@ begin
             Load => '1', 
             X => x_bin,
             Y => y_bin,
-            Ready => open,
+            Ready => adder_ready,
             Sum => result_add,
             error_flag => adder_error
         );
