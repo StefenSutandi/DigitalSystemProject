@@ -11,8 +11,8 @@ entity bin_ascii is
 		DATA_WIDTH_BIN : positive := 14
 	);
 	port(
-        x_bin_in : in std_logic_vector(DATA_WIDTH_ASCII-1 downto 0);
-        x_ascii_out : out std_logic_vector(DATA_WIDTH_BCD-1 downto 0)
+        x_bin_in : in std_logic_vector(DATA_WIDTH_BIN-1 downto 0);
+        x_ascii_out : out std_logic_vector(DATA_WIDTH_ASCII-1 downto 0)
     );
     
 end entity bin_ascii;

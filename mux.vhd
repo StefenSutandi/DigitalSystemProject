@@ -5,13 +5,13 @@ use IEEE.numeric_std.all;
 entity mux is 
     port( 
         selector : in std_logic_vector(1 downto 0);
-        adder, subtractor, multiplier, divider : in signed(3 downto 0); 
-        output_selector : out signed(3 downto 0) 
+        adder, subtractor, multiplier, divider : in std_logic_vector (13 downto 0); 
+        output_selector : out std_logic_vector(13 downto 0) 
     );
 end mux;
 
 architecture arc_mux of mux is
-    signal temp_output : signed(3 downto 0);  -- Variabel internal untuk hasil sementara
+    signal temp_output : std_logic_vector(13 downto 0);  -- Variabel internal untuk hasil sementara
 begin
     process(selector)
     begin

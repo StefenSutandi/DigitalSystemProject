@@ -12,7 +12,7 @@ entity divider is
 	);
     port (
         dividend : in std_logic_vector(DATA_WIDTH_BIN-1 downto 0);
-        divisor : in std_logic_vector(DATA_WIDTH_BCD-1 downto 0);
+        divisor : in std_logic_vector(DATA_WIDTH_BIN-1 downto 0);
         quotient : out std_logic_vector(DATA_WIDTH_BIN-1 downto 0);
         error_flag: out std_logic
     );	
