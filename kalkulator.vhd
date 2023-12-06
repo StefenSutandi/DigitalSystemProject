@@ -54,7 +54,8 @@ architecture kalkulator_arc of kalkulator is
             Clk, reset_count, Load : in  std_logic;
             X, Y              : in  std_logic_vector(13 downto 0);
             Ready             : out std_logic;
-            Sum               : out std_logic_vector(13 downto 0)
+            Sum               : out std_logic_vector(13 downto 0);
+            error_flag        : out std_logic
         );
     end component;
 
@@ -123,6 +124,7 @@ begin
             Y => y_bin,
             Ready => open,
             Sum => result_add
+            error_flag => display_error
         );
 
     X_SUB : subtractor 

@@ -7,7 +7,8 @@ entity adder is
     Clk, reset_count, Load : in  std_logic;
     X, Y              : in  std_logic_vector(13 downto 0);
     Ready             : out std_logic;
-    Sum               : out std_logic_vector(13 downto 0)
+    Sum               : out std_logic_vector(13 downto 0);
+    error_flag		  : out std_logic
   );
 end entity;
 
@@ -96,5 +97,13 @@ begin
   end process;
 
   sum <= SumShift;
-
+  process (SumShift)
+  begin
+    if SumShift > "10011100001111" then
+      error_flag <= '1';
+    else
+      error_flag <= '0';
+    end if;
+  end process;
+  
 end architecture;
