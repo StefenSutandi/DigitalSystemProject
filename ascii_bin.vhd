@@ -13,8 +13,8 @@ entity ascii_bin is
 	port(
         x_ascii_in : in std_logic_vector(DATA_WIDTH_ASCII-1 downto 0);
         y_ascii_in : in std_logic_vector(DATA_WIDTH_ASCII-1 downto 0);
-        x_bin_out : out std_logic_vector(DATA_WIDTH_BCD-1 downto 0);
-        y_bin_out : out std_logic_vector(DATA_WIDTH_BCD-1 downto 0)
+        x_bin_out : out std_logic_vector(DATA_WIDTH_BIN-1 downto 0);
+        y_bin_out : out std_logic_vector(DATA_WIDTH_BIN-1 downto 0)
     );
 end entity ascii_bin;
 
@@ -22,7 +22,7 @@ architecture behavioral of ascii_bin is
 	signal x_bcd_temp : std_logic_vector(DATA_WIDTH_BCD-1 downto 0);
 	signal y_bcd_temp : std_logic_vector(DATA_WIDTH_BCD-1 downto 0);
 -- Components Declaration
-component ascii_bcdo is
+component ascii_bcd is
     port(
         input_ascii_x : in std_logic_vector(DATA_WIDTH_ASCII-1 downto 0);
         input_ascii_y : in std_logic_vector(DATA_WIDTH_ASCII-1 downto 0);
@@ -40,7 +40,7 @@ component bcd_bin is
 end component;
 begin
 	-- ASCII to BCD Conversion for Dividend and Divisor
-    ascii_to_bcd_conversion : ascii_bcdo
+    ascii_to_bcd_conversion : ascii_bcd
         port map (
             input_ascii_x => x_ascii_in,
             output_bcd_x => x_bcd_temp,
