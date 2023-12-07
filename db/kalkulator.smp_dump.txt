@@ -1,0 +1,6 @@
+
+State Machine - |kalkulator|adder:X_ADD|state
+Name state.S_Cout1 state.S_Cout0 state.Idle 
+state.Idle 0 0 0 
+state.S_Cout0 0 1 1 
+state.S_Cout1 1 0 1 

@@ -66,8 +66,8 @@ begin
       when S_Cout0 =>
         Carry := XShift(0) xor YShift(0);
 
-        XShift_next <= XShift(13) & XShift(13 downto 1);
-        YShift_next <= YShift(13) & YShift(13 downto 1);
+        XShift_next <= '0' & XShift(13 downto 1);
+        YShift_next <= '0' & YShift(13 downto 1);
         SumShift_next <= Carry & SumShift(13 downto 1);
         next_count <= count - 1;
 
@@ -81,8 +81,8 @@ begin
       when S_Cout1 =>
         Carry := not (XShift(0) xor YShift(0));
 
-        XShift_next <= XShift(13) & XShift(13 downto 1);
-        YShift_next <= YShift(13) & YShift(13 downto 1);
+        XShift_next <= '0' & XShift(13 downto 1);
+        YShift_next <= '0' & YShift(13 downto 1);
         SumShift_next <= Carry & SumShift(13 downto 1);
         next_count <= count - 1;
 
