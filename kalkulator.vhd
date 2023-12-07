@@ -18,7 +18,7 @@ entity kalkulator is
         operation_choice: in std_logic_vector(1 downto 0);
         output_data: out std_logic_vector(DATA_WIDTH_ASCII-1 downto 0);
         display_error: out std_logic;
-        adder_ready : out std_logic
+        adder_ready : buffer std_logic
     );
 end entity kalkulator;
 
@@ -158,9 +158,20 @@ begin
             x_ascii_out => output_ascii
         );
 
-    result_error <= adder_error or divider_error;
-    display_error <= result_error;
-
+    process (operation_choice, adder_error, divider_error, adder_ready)
+    begin
+        if operation_choice = "00" and adder_ready = '1' then
+            result_error <= adder_error;
+            display_error <= result_error;
+        elsif operation_choice = "11" then
+            result_error <= divider_error;
+            display_error <= result_error;
+        else
+			result_error <= '0';
+			display_error <= '0';
+        end if;
+    end process;
+    
     output_data <= output_ascii;
 
 end architecture kalkulator_arc;
