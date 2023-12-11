@@ -25,7 +25,7 @@ architecture behavioral of adder is
 begin
   sequential: process (clk, reset_count) is
   begin
-    if clk'event and clk = '1' then
+    if clk'event and clk = '1' then -- Pengecekan apakah ketika clock = 1 harus melakukan reset atau memasuki state selanjutnya
       if reset_count = '1' then
         state <= Idle;
         XShift <= (others => '0');
@@ -52,8 +52,8 @@ begin
     ready <= '0';
 
     case state is
-      when Idle =>
-        ready <= '1';
+      when Idle =>  -- Ketika Load = 1, lalu ready = 1 maka hasil sudah selesai
+        ready <= '1'; -- Jika ready = 0 maka tetap dilanjutkan ke state selanjutnya sampai next_count menjadi 0
         if Load = '1' then
           XShift_next <= X;
           YShift_next <= Y;
@@ -63,7 +63,7 @@ begin
         else
           state_next <= Idle;
         end if;
-      when S_Cout0 =>
+      when S_Cout0 => -- State ketika tidak ada carry out untuk penjumlahan bit tersebut (diambil LSB)
         Carry := XShift(0) xor YShift(0);
 
         XShift_next <= '0' & XShift(13 downto 1);
@@ -78,9 +78,9 @@ begin
         else
           state_next <= S_Cout0;
         end if;
-      when S_Cout1 =>
-        Carry := not (XShift(0) xor YShift(0));
-
+      when S_Cout1 => -- State ketika ada carry out untuk penjumlaha bit tersebut (diambil LSB)
+        Carry := not (XShift(0) xor YShift(0)); -- Ketika di state ini sudah ada carry 1 dari sebelumnya
+                                                -- Sehingga jika 1 1, akan menghasilkan 1 dan saat 1 0/ 0 1 akan menghasilkan 0 (ada not)
         XShift_next <= '0' & XShift(13 downto 1);
         YShift_next <= '0' & YShift(13 downto 1);
         SumShift_next <= Carry & SumShift(13 downto 1);
@@ -99,7 +99,7 @@ begin
   sum <= SumShift;
   process (SumShift)
   begin
-    if SumShift > "10011100001111" then
+    if SumShift > "10011100001111" then -- Untuk penanganan error, saat Sumnya melebihi 9999 maka akan error
       error_flag <= '1';
     else
       error_flag <= '0';

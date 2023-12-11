@@ -38,7 +38,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 		INTERVAL_TYPE = HALF_GRID;
 	}
 	LINE{
-		SIGNAL = "adder_ready";
+		SIGNAL = "clock";
 		INDEX = 0;
 		FORMAT = E;
 		SCALE = 1;
@@ -46,24 +46,8 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 		FLAG = N;
 	}
 	LINE{
-		SIGNAL = "clock";
-		INDEX = 1;
-		FORMAT = E;
-		SCALE = 1;
-		VISIBLE = Y;
-		FLAG = N;
-	}
-	LINE{
-		SIGNAL = "display_error";
-		INDEX = 2;
-		FORMAT = E;
-		SCALE = 1;
-		VISIBLE = Y;
-		FLAG = N;
-	}
-	LINE{
 		SIGNAL = "input_x";
-		INDEX = 3;
+		INDEX = 1;
 		FORMAT = T;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -71,7 +55,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_x[31]";
-		INDEX = 4;
+		INDEX = 2;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -79,7 +63,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_x[30]";
-		INDEX = 5;
+		INDEX = 3;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -87,7 +71,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_x[29]";
-		INDEX = 6;
+		INDEX = 4;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -95,7 +79,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_x[28]";
-		INDEX = 7;
+		INDEX = 5;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -103,7 +87,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_x[27]";
-		INDEX = 8;
+		INDEX = 6;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -111,7 +95,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_x[26]";
-		INDEX = 9;
+		INDEX = 7;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -119,7 +103,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_x[25]";
-		INDEX = 10;
+		INDEX = 8;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -127,7 +111,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_x[24]";
-		INDEX = 11;
+		INDEX = 9;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -135,7 +119,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_x[23]";
-		INDEX = 12;
+		INDEX = 10;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -143,7 +127,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_x[22]";
-		INDEX = 13;
+		INDEX = 11;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -151,7 +135,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_x[21]";
-		INDEX = 14;
+		INDEX = 12;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -159,7 +143,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_x[20]";
-		INDEX = 15;
+		INDEX = 13;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -167,7 +151,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_x[19]";
-		INDEX = 16;
+		INDEX = 14;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -175,7 +159,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_x[18]";
-		INDEX = 17;
+		INDEX = 15;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -183,7 +167,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_x[17]";
-		INDEX = 18;
+		INDEX = 16;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -191,7 +175,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_x[16]";
-		INDEX = 19;
+		INDEX = 17;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -199,7 +183,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_x[15]";
-		INDEX = 20;
+		INDEX = 18;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -207,7 +191,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_x[14]";
-		INDEX = 21;
+		INDEX = 19;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -215,7 +199,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_x[13]";
-		INDEX = 22;
+		INDEX = 20;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -223,7 +207,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_x[12]";
-		INDEX = 23;
+		INDEX = 21;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -231,7 +215,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_x[11]";
-		INDEX = 24;
+		INDEX = 22;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -239,7 +223,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_x[10]";
-		INDEX = 25;
+		INDEX = 23;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -247,7 +231,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_x[9]";
-		INDEX = 26;
+		INDEX = 24;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -255,7 +239,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_x[8]";
-		INDEX = 27;
+		INDEX = 25;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -263,7 +247,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_x[7]";
-		INDEX = 28;
+		INDEX = 26;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -271,7 +255,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_x[6]";
-		INDEX = 29;
+		INDEX = 27;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -279,7 +263,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_x[5]";
-		INDEX = 30;
+		INDEX = 28;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -287,7 +271,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_x[4]";
-		INDEX = 31;
+		INDEX = 29;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -295,7 +279,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_x[3]";
-		INDEX = 32;
+		INDEX = 30;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -303,7 +287,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_x[2]";
-		INDEX = 33;
+		INDEX = 31;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -311,7 +295,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_x[1]";
-		INDEX = 34;
+		INDEX = 32;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -319,7 +303,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_x[0]";
-		INDEX = 35;
+		INDEX = 33;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -327,7 +311,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_y";
-		INDEX = 36;
+		INDEX = 34;
 		FORMAT = T;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -335,7 +319,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_y[31]";
-		INDEX = 37;
+		INDEX = 35;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -343,7 +327,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_y[30]";
-		INDEX = 38;
+		INDEX = 36;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -351,7 +335,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_y[29]";
-		INDEX = 39;
+		INDEX = 37;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -359,7 +343,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_y[28]";
-		INDEX = 40;
+		INDEX = 38;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -367,7 +351,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_y[27]";
-		INDEX = 41;
+		INDEX = 39;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -375,7 +359,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_y[26]";
-		INDEX = 42;
+		INDEX = 40;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -383,7 +367,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_y[25]";
-		INDEX = 43;
+		INDEX = 41;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -391,7 +375,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_y[24]";
-		INDEX = 44;
+		INDEX = 42;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -399,7 +383,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_y[23]";
-		INDEX = 45;
+		INDEX = 43;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -407,7 +391,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_y[22]";
-		INDEX = 46;
+		INDEX = 44;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -415,7 +399,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_y[21]";
-		INDEX = 47;
+		INDEX = 45;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -423,7 +407,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_y[20]";
-		INDEX = 48;
+		INDEX = 46;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -431,7 +415,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_y[19]";
-		INDEX = 49;
+		INDEX = 47;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -439,7 +423,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_y[18]";
-		INDEX = 50;
+		INDEX = 48;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -447,7 +431,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_y[17]";
-		INDEX = 51;
+		INDEX = 49;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -455,7 +439,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_y[16]";
-		INDEX = 52;
+		INDEX = 50;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -463,7 +447,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_y[15]";
-		INDEX = 53;
+		INDEX = 51;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -471,7 +455,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_y[14]";
-		INDEX = 54;
+		INDEX = 52;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -479,7 +463,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_y[13]";
-		INDEX = 55;
+		INDEX = 53;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -487,7 +471,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_y[12]";
-		INDEX = 56;
+		INDEX = 54;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -495,7 +479,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_y[11]";
-		INDEX = 57;
+		INDEX = 55;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -503,7 +487,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_y[10]";
-		INDEX = 58;
+		INDEX = 56;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -511,7 +495,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_y[9]";
-		INDEX = 59;
+		INDEX = 57;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -519,7 +503,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_y[8]";
-		INDEX = 60;
+		INDEX = 58;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -527,7 +511,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_y[7]";
-		INDEX = 61;
+		INDEX = 59;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -535,7 +519,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_y[6]";
-		INDEX = 62;
+		INDEX = 60;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -543,7 +527,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_y[5]";
-		INDEX = 63;
+		INDEX = 61;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -551,7 +535,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_y[4]";
-		INDEX = 64;
+		INDEX = 62;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -559,7 +543,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_y[3]";
-		INDEX = 65;
+		INDEX = 63;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -567,7 +551,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_y[2]";
-		INDEX = 66;
+		INDEX = 64;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -575,7 +559,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_y[1]";
-		INDEX = 67;
+		INDEX = 65;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -583,31 +567,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "input_y[0]";
-		INDEX = 68;
-		FORMAT = E;
-		SCALE = 1;
-		VISIBLE = Y;
-		FLAG = N;
-	}
-	LINE{
-		SIGNAL = "operation_choice";
-		INDEX = 69;
-		FORMAT = T;
-		SCALE = 1;
-		VISIBLE = Y;
-		FLAG = N;
-	}
-	LINE{
-		SIGNAL = "operation_choice[1]";
-		INDEX = 70;
-		FORMAT = E;
-		SCALE = 1;
-		VISIBLE = Y;
-		FLAG = N;
-	}
-	LINE{
-		SIGNAL = "operation_choice[0]";
-		INDEX = 71;
+		INDEX = 66;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -615,7 +575,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "output_data";
-		INDEX = 72;
+		INDEX = 67;
 		FORMAT = T;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -623,7 +583,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "output_data[31]";
-		INDEX = 73;
+		INDEX = 68;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -631,7 +591,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "output_data[30]";
-		INDEX = 74;
+		INDEX = 69;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -639,7 +599,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "output_data[29]";
-		INDEX = 75;
+		INDEX = 70;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -647,7 +607,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "output_data[28]";
-		INDEX = 76;
+		INDEX = 71;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -655,7 +615,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "output_data[27]";
-		INDEX = 77;
+		INDEX = 72;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -663,7 +623,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "output_data[26]";
-		INDEX = 78;
+		INDEX = 73;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -671,7 +631,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "output_data[25]";
-		INDEX = 79;
+		INDEX = 74;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -679,7 +639,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "output_data[24]";
-		INDEX = 80;
+		INDEX = 75;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -687,7 +647,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "output_data[23]";
-		INDEX = 81;
+		INDEX = 76;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -695,7 +655,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "output_data[22]";
-		INDEX = 82;
+		INDEX = 77;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -703,7 +663,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "output_data[21]";
-		INDEX = 83;
+		INDEX = 78;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -711,7 +671,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "output_data[20]";
-		INDEX = 84;
+		INDEX = 79;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -719,7 +679,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "output_data[19]";
-		INDEX = 85;
+		INDEX = 80;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -727,7 +687,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "output_data[18]";
-		INDEX = 86;
+		INDEX = 81;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -735,7 +695,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "output_data[17]";
-		INDEX = 87;
+		INDEX = 82;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -743,7 +703,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "output_data[16]";
-		INDEX = 88;
+		INDEX = 83;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -751,7 +711,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "output_data[15]";
-		INDEX = 89;
+		INDEX = 84;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -759,7 +719,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "output_data[14]";
-		INDEX = 90;
+		INDEX = 85;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -767,7 +727,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "output_data[13]";
-		INDEX = 91;
+		INDEX = 86;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -775,7 +735,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "output_data[12]";
-		INDEX = 92;
+		INDEX = 87;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -783,7 +743,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "output_data[11]";
-		INDEX = 93;
+		INDEX = 88;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -791,7 +751,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "output_data[10]";
-		INDEX = 94;
+		INDEX = 89;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -799,7 +759,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "output_data[9]";
-		INDEX = 95;
+		INDEX = 90;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -807,7 +767,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "output_data[8]";
-		INDEX = 96;
+		INDEX = 91;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -815,7 +775,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "output_data[7]";
-		INDEX = 97;
+		INDEX = 92;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -823,7 +783,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "output_data[6]";
-		INDEX = 98;
+		INDEX = 93;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -831,7 +791,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "output_data[5]";
-		INDEX = 99;
+		INDEX = 94;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -839,7 +799,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "output_data[4]";
-		INDEX = 100;
+		INDEX = 95;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -847,7 +807,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "output_data[3]";
-		INDEX = 101;
+		INDEX = 96;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -855,7 +815,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "output_data[2]";
-		INDEX = 102;
+		INDEX = 97;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -863,7 +823,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "output_data[1]";
-		INDEX = 103;
+		INDEX = 98;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -871,7 +831,39 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "output_data[0]";
-		INDEX = 104;
+		INDEX = 99;
+		FORMAT = E;
+		SCALE = 1;
+		VISIBLE = Y;
+		FLAG = N;
+	}
+	LINE{
+		SIGNAL = "display_error";
+		INDEX = 100;
+		FORMAT = E;
+		SCALE = 1;
+		VISIBLE = Y;
+		FLAG = N;
+	}
+	LINE{
+		SIGNAL = "operation_choice";
+		INDEX = 101;
+		FORMAT = T;
+		SCALE = 1;
+		VISIBLE = Y;
+		FLAG = N;
+	}
+	LINE{
+		SIGNAL = "operation_choice[1]";
+		INDEX = 102;
+		FORMAT = E;
+		SCALE = 1;
+		VISIBLE = Y;
+		FLAG = N;
+	}
+	LINE{
+		SIGNAL = "operation_choice[0]";
+		INDEX = 103;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
@@ -879,7 +871,7 @@ VECTOR("C:/Users/User/OneDrive - Institut Teknologi Bandung/Implementasi sisdig/
 	}
 	LINE{
 		SIGNAL = "reset";
-		INDEX = 105;
+		INDEX = 104;
 		FORMAT = E;
 		SCALE = 1;
 		VISIBLE = Y;
